@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Wireless Headphones",
+    "sku": "WH-001",
+    "description": "High-quality wireless headphones with noise cancellation",
+    "price": 99.99,
+    "slug": "wireless-headphones"
+  },
+  {
+    "name": "Smartphone",
+    "sku": "SM-002",
+    "description": "Flagship smartphone with advanced features",
+    "price": 699.99,
+    "slug": "smartphone"
+  },
+  {
+    "name": "Laptop",
+    "sku": "LP-003",
+    "description": "Powerful and lightweight laptop for productivity",
+    "price": 999.99,
+    "slug": "laptop"
+  },
+  {
+    "name": "Smart TV",
+    "sku": "TV-004",
+    "description": "4K smart TV with built-in streaming capabilities",
+    "price": 599.99,
+    "slug": "smart-tv"
+  },
+  {
+    "name": "Fitness Tracker",
+    "sku": "FT-005",
+    "description": "Stylish and feature-rich fitness tracker",
+    "price": 79.99,
+    "slug": "fitness-tracker"
+  },
+  {
+    "name": "Gaming Mouse",
+    "sku": "GM-006",
+    "description": "Ergonomic and high-performance gaming mouse",
+    "price": 49.99,
+    "slug": "gaming-mouse"
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "sku": "KB-007",
+    "description": "Tactile and responsive mechanical keyboard",
+    "price": 89.99,
+    "slug": "mechanical-keyboard"
+  },
+  {
+    "name": "Portable Bluetooth Speaker",
+    "sku": "BS-008",
+    "description": "Powerful and portable Bluetooth speaker",
+    "price": 59.99,
+    "slug": "portable-bluetooth-speaker"
+  },
+  {
+    "name": "Digital Camera",
+    "sku": "DC-009",
+    "description": "High-resolution digital camera with advanced features",
+    "price": 399.99,
+    "slug": "digital-camera"
+  },
+  {
+    "name": "Smartwatch",
+    "sku": "SW-010",
+    "description": "Versatile smartwatch with fitness tracking and connectivity",
+    "price": 199.99,
+    "slug": "smartwatch"
+  },
+  {
+    "name": "Wireless Charger",
+    "sku": "WC-011",
+    "description": "Convenient wireless charging pad for smartphones",
+    "price": 29.99,
+    "slug": "wireless-charger"
+  },
+  {
+    "name": "Electric Toothbrush",
+    "sku": "TB-012",
+    "description": "Advanced electric toothbrush for better oral hygiene",
+    "price": 69.99,
+    "slug": "electric-toothbrush"
+  },
+  {
+    "name": "Smart Home Hub",
+    "sku": "SH-013",
+    "description": "Central control device for smart home devices",
+    "price": 99.99,
+    "slug": "smart-home-hub"
+  },
+  {
+    "name": "Wireless Earbuds",
+    "sku": "EB-014",
+    "description": "Comfortable and high-quality wireless earbuds",
+    "price": 149.99,
+    "slug": "wireless-earbuds"
+  },
+  {
+    "name": "Action Camera",
+    "sku": "AC-015",
+    "description": "Rugged and compact action camera for outdoor adventures",
+    "price": 149.99,
+    "slug": "action-camera"
+  },
+  {
+    "name": "Smart Thermostat",
+    "sku": "ST-016",
+    "description": "Energy-efficient and programmable smart thermostat",
+    "price": 99.99,
+    "slug": "smart-thermostat"
+  },
+  {
+    "name": "Robotic Vacuum Cleaner",
+    "sku": "VC-017",
+    "description": "Intelligent and autonomous robot vacuum cleaner",
+    "price": 299.99,
+    "slug": "robotic-vacuum-cleaner"
+  },
+  {
+    "name": "Portable Power Bank",
+    "sku": "PB-018",
+    "description": "High-capacity power bank for on-the-go charging",
+    "price": 39.99,
+    "slug": "portable-power-bank"
+  },
+  {
+    "name": "Smart Lights",
+    "sku": "SL-019",
+    "description": "Wireless and programmable smart lighting system",
+    "price": 59.99,
+    "slug": "smart-lights"
+  },
+  {
+    "name": "Virtual Reality Headset",
+    "sku": "VR-020",
+    "description": "Immersive virtual reality headset for gaming and entertainment",
+    "price": 399.99,
+    "slug": "virtual-reality-headset"
+  }
+]

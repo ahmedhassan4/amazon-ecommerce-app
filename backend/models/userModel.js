@@ -45,6 +45,16 @@ const userSchema = mongoose.Schema({
     default: true,
     select: false,
   },
+  cart: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Cart",
+  },
+  userPayments: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "UserPayment",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {

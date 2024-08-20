@@ -8,20 +8,41 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 3,
     },
+    description: {
+      type: String,
+      required: true,
+    },
     sku: {
       type: String,
       required: true,
       unique: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
+    slug: String,
     price: {
       type: Number,
       required: true,
     },
-    slug: String,
+    subCategory: {
+      type: mongoose.Schema.ObjectId,
+      ref: "SubCategory",
+      required: true,
+    },
+    discounts: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Discount",
+      },
+    ],
+    coupons: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Coupons",
+      },
+    ],
+    inventory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Inventory",
+    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -32,12 +53,28 @@ const productSchema = new mongoose.Schema(
       default: Date.now,
       select: false,
     },
+    deletedAt: {
+      type: Date,
+      default: Date.now,
+      select: false,
+    },
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
+
+// // Virtual Property for Price with Discount
+// productSchema.virtual('priceAfterDiscount').get(function () {
+//   // Calculate the discounted price
+//   if (this.discounts.length > 0) {
+//     // Assuming the first discount is applied for simplicity
+//     const discount = this.discounts[0];
+//     return this.price * (1 - discount.discount_percent / 100);
+//   }
+//   return this.price;
+// });
 
 // virual Properties
 const poundToDollar = 50;

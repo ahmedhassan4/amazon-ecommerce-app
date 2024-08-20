@@ -14,6 +14,11 @@ const subCtaegorySchema = new mongoose.Schema({
     ref: "Category",
     required: true,
   },
+  attribute: {
+    type: Map,
+    of: mongoose.Schema.Types.Mixed,
+    default: {},
+  },
   createdAt: {
     type: Date,
     default: Date.now,

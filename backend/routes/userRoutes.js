@@ -1,7 +1,6 @@
 import express from "express";
 import {
   getAllusers,
-  createUser,
   getUser,
   updateUser,
   deleteUser,
@@ -31,6 +30,6 @@ router.patch("/updateMe", protect, updateMe);
 router.delete("/deleteMe", protect, deleteMe);
 
 router.route("/").get(getAllusers);
-// router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
+router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 
 export default router;

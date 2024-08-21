@@ -1,0 +1,16 @@
+[
+  {
+    "name": "T-Shirt",
+    "description": "A comfortable cotton t-shirt",
+    "sku": "T001",
+    "slug": "t-shirt",
+    "price": 19.99
+  },
+  {
+    "name": "Jeans",
+    "description": "A pair of classic blue jeans",
+    "sku": "J001",
+    "slug": "jeans",
+    "price": 39.99
+  }
+]

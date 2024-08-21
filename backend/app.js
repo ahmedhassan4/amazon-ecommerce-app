@@ -2,6 +2,7 @@ import express from "express";
 import AppError from "./utils/appError.js";
 import userRouter from "./routes/userRoutes.js";
 import productRouter from "./routes/productRoutes.js";
+import cartRouter from "./routes/cartRoutes.js";
 import globalErrorhandler from "./controllers/errorController.js";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
@@ -40,6 +41,7 @@ app.use("/api", limiter);
 // Routes
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
+app.use("/api/v1/carts", cartRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`con't find ${req.originalUrl}`, 404));

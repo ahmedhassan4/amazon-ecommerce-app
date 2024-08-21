@@ -45,10 +45,10 @@ const userSchema = mongoose.Schema({
     default: true,
     select: false,
   },
-  cart: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Cart",
-  },
+  // cart: {
+  //   type: mongoose.Schema.ObjectId,
+  //   ref: "Cart",
+  // },
   userPayments: [
     {
       type: mongoose.Schema.ObjectId,
@@ -76,6 +76,15 @@ userSchema.pre("find", function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
+
+// userSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: "cart",
+//     select: "-__v",
+//   });
+
+//   next();
+// });
 
 userSchema.methods.isPasswordMatched = async function (
   candidatePasswrod,

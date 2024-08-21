@@ -33,6 +33,19 @@ const cartSchema = new mongoose.Schema({
   ],
 });
 
+// MiddleWare
+cartSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+  }).populate({
+    path: "items",
+    populate: {
+      path: "product",
+    },
+  });
+  next();
+});
+
 const Cart = mongoose.model("Cart", cartSchema);
 export default Cart;
 

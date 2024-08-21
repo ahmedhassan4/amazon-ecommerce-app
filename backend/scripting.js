@@ -1,11 +1,16 @@
 import fs from "fs";
 import mongoose from "mongoose";
-import Product from "./models/productModel.js";
+import User from "./models/cartItemModel.js";
 
-import dotenv from "dotenv"
-dotenv.config({path: './config.env'})
+import dotenv from "dotenv";
+import CartItem from "./models/cartItemModel.js";
+import Cart from "./models/cartModel.js";
+dotenv.config({ path: "./config.env" });
 
-const DB = process.env.DATABASE.replace('<PASSWORD>' , process.env.DATABASE_PASSWORD)
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
 
 mongoose
   .connect(DB)
@@ -16,11 +21,11 @@ mongoose
     console.log("DB error", err);
   });
 
-const users = JSON.parse(fs.readFileSync("./AmazonProduct.json", "utf-8"));
+const users = JSON.parse(fs.readFileSync("./dev-data/cart.json", "utf-8"));
 
 const importData = async () => {
   try {
-    await Product.create(users);
+    await Cart.create(users);
     console.log("data imported successfully");
   } catch (err) {
     console.log(err);

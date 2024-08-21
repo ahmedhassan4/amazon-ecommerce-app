@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/appError.js";
+import Cart from "../models/cartModel.js";
 
 const filterRequestBody = (bodyRequest, ...allowedFields) => {
   const filteredBodyRequest = {};
@@ -61,16 +62,22 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-export const createUser = (req, res) => {
+export const getUser = catchAsync(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new AppError(`No User Found with this id : ${req.params.id}`, 404)
+    );
+  }
   res.status(200).json({
-    data: "heloooooooo;o;",
+    status: "success",
+    data: {
+      user,
+    },
   });
-};
-export const getUser = (req, res) => {
-  res.status(200).json({
-    data: "heloooooooo;o;",
-  });
-};
+});
+
 export const updateUser = (req, res) => {
   res.status(200).json({
     data: "heloooooooo;o;",

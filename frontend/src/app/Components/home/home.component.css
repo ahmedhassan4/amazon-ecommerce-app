@@ -1,0 +1,14 @@
+.slider {
+    display: flex;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slider-nav {
+    cursor: pointer;
+  }
+  
+  .slider-nav.active {
+    background-color: #ff9900;
+  }
+  

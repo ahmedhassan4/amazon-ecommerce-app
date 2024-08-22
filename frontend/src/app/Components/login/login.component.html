@@ -4,12 +4,18 @@
 >
   <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-md shadow-lg">
     <div>
-      <img class="mx-auto h-12 w-auto" src="Amazon_logo.svg" alt="Amazon" />
+      <img
+        role="button"
+        routerLink="/"
+        class="mx-auto h-12 w-auto"
+        src="Amazon_logo.svg"
+        alt="Amazon"
+      />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Sign in
       </h2>
     </div>
-    <form class="mt-8 space-y-6">
+    <form (ngSubmit)="addUser()" #loginForm="ngForm" class="mt-8 space-y-6">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
           <label for="email-address" class="sr-only">Email address</label>
@@ -19,9 +25,22 @@
             type="email"
             autocomplete="email"
             required
+            minlength="3"
+            pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
             placeholder="Email address"
+            [(ngModel)]="formData.email"
+            #emailInput="ngModel"
+            [ngClass]="{
+              'border-red-500': emailInput.invalid && emailInput.touched
+            }"
           />
+          <div
+            *ngIf="emailInput.invalid && emailInput.touched"
+            class="text-red-500 text-xs mt-1"
+          >
+            Please enter a valid email address.
+          </div>
         </div>
         <div class="mt-4">
           <label for="password" class="sr-only">Password</label>
@@ -31,9 +50,21 @@
             type="password"
             autocomplete="current-password"
             required
+            minlength="3"
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
             placeholder="Password"
+            [(ngModel)]="formData.password"
+            #passwordInput="ngModel"
+            [ngClass]="{
+              'border-red-500': passwordInput.invalid && passwordInput.touched
+            }"
           />
+          <div
+            *ngIf="passwordInput.invalid && passwordInput.touched"
+            class="text-red-500 text-xs mt-1"
+          >
+            Password is required.
+          </div>
         </div>
       </div>
 
@@ -60,6 +91,7 @@
       <div>
         <button
           type="submit"
+          [disabled]="loginForm.invalid"
           class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
         >
           Sign in
@@ -68,9 +100,57 @@
     </form>
     <p class="mt-6 text-center text-sm text-gray-600">
       New to Amazon?
-      <a href="#" class="font-medium text-yellow-500 hover:text-yellow-600"
+      <a
+        routerLink="/signup"
+        href="#"
+        class="font-medium text-yellow-500 hover:text-yellow-600"
         >Create your Amazon account</a
       >
     </p>
+  </div>
+</div>
+
+<div class="bg-white mt-12 py-8 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto text-center space-y-4">
+    <div class="border-t border-gray-300 my-4"></div>
+
+    <div class="text-sm text-gray-600">
+      <ul class="flex justify-center space-x-6">
+        <li>
+          <a
+            class="text-yellow-600 hover:text-yellow-700"
+            target="_blank"
+            rel="noopener"
+            href="/gp/help/customer/display.html/ref=ap_desktop_footer_cou?ie=UTF8&amp;nodeId=201909000"
+          >
+            Conditions of Use
+          </a>
+        </li>
+        <li>
+          <a
+            class="text-yellow-600 hover:text-yellow-700"
+            target="_blank"
+            rel="noopener"
+            href="/gp/help/customer/display.html/ref=ap_desktop_footer_privacy_notice?ie=UTF8&amp;nodeId=201909010"
+          >
+            Privacy Notice
+          </a>
+        </li>
+        <li>
+          <a
+            class="text-yellow-600 hover:text-yellow-700"
+            target="_blank"
+            rel="noopener"
+            href="/help"
+          >
+            Help
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="text-xs text-gray-500">
+      ©1996–2024, Amazon.com, Inc. or its affiliates
+    </div>
   </div>
 </div>

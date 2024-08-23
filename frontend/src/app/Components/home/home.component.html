@@ -1,93 +1,21 @@
-<div class="bg-gray-400">
-    <!-- <div class="relative">
-      <div class="w-full h-[500px] overflow-hidden">
-        <div class="slider flex transition-transform duration-500 ease-in-out">
-          <div class="w-full h-full flex items-center justify-center bg-cover bg-center" style="background-image: url('assets/slide1.jpg')">
-            <div class="text-white text-center">
-              <h2 class="text-4xl font-bold">Big Sale on Electronics</h2>
-              <p class="text-xl mt-4">Save up to 50% on selected items</p>
-            </div>
-          </div>
-          <div class="w-full h-full flex items-center justify-center bg-cover bg-center" style="background-image: url('assets/slide2.jpg')">
-            <div class="text-white text-center">
-              <h2 class="text-4xl font-bold">New Fashion Collection</h2>
-              <p class="text-xl mt-4">Explore the latest trends</p>
-            </div>
-          </div>
-          <div class="w-full h-full flex items-center justify-center bg-cover bg-center" style="background-image: url('assets/slide3.jpg')">
-            <div class="text-white text-center">
-              <h2 class="text-4xl font-bold">Home & Kitchen Sale</h2>
-              <p class="text-xl mt-4">Up to 70% off</p>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
-        <button class="slider-nav bg-white rounded-full w-4 h-4"></button>
-        <button class="slider-nav bg-white rounded-full w-4 h-4"></button>
-        <button class="slider-nav bg-white rounded-full w-4 h-4"></button>
-      </div>
-    </div> -->
-  
-    <div class="container mx-auto px-4 py-8">
-      <h2 class="text-2xl font-bold mb-6">Shop by Category</h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/category-electronics.jpg" alt="Electronics" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Electronics</h3>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/category-fashion.jpg" alt="Fashion" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Fashion</h3>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/category-fashion.jpg" alt="Fashion" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Fashion</h3>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/category-fashion.jpg" alt="Fashion" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Fashion</h3>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/category-fashion.jpg" alt="Fashion" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Fashion</h3>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/category-home.jpg" alt="Home & Kitchen" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Home & Kitchen</h3>
-        </div>
-      </div>
-    </div>
-  
-    <div class="container mx-auto px-4 py-8">
-      <h2 class="text-2xl font-bold mb-6">Featured Products</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/product1.jpg" alt="Product 1" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Product 1</h3>
-          <p class="text-gray-600 mt-2">$29.99</p>
-          <button class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded">Add to Cart</button>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/product1.jpg" alt="Product 1" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Product 1</h3>
-          <p class="text-gray-600 mt-2">$29.99</p>
-          <button class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded">Add to Cart</button>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/product1.jpg" alt="Product 1" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Product 1</h3>
-          <p class="text-gray-600 mt-2">$29.99</p>
-          <button class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded">Add to Cart</button>
-        </div>
-        <div class="bg-white p-4 shadow hover:shadow-lg transition-shadow duration-300">
-          <img src="assets/product2.jpg" alt="Product 2" class="w-full h-48 object-cover mb-4">
-          <h3 class="text-lg font-bold">Product 2</h3>
-          <p class="text-gray-600 mt-2">$49.99</p>
-          <button class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded">Add to Cart</button>
-        </div>
-      </div>    
-    </div>
+<div class=" m-auto mb-16 ">
+  <div class="carousel-section bg-slate-200 py-32">
+    <app-product-carousel></app-product-carousel>
+  </div>
+  <div class="cards-section flex gap-5 my-32 container m-auto ">
+    <app-product-card title="Gaming accessories" category="electronics"></app-product-card>
+    <app-product-card category="men's clothing"></app-product-card>
+    <app-product-card category="women's clothing"></app-product-card>
+    <app-product-card category="jewelery"></app-product-card>
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+    <app-electronics-section></app-electronics-section>
+    <app-clothing-section class="mt-8"></app-clothing-section>
+  </div>
+  <div class="container mx-auto px-4 py-8">
+    <!-- Other sections -->
+    <app-top-brands-section class="mt-8"></app-top-brands-section>
   </div>
   
+</div>

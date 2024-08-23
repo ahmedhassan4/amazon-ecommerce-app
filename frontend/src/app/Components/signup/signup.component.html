@@ -1,73 +1,92 @@
-<!-- signup.component.html -->
 <div
   class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8"
 >
   <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-md shadow-lg">
     <div>
       <img
+        role="button"
+        routerLink="/"
         class="mx-auto h-12 w-auto"
-        src="assets/amazon-logo.png"
+        src="Amazon_logo.svg"
         alt="Amazon"
       />
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
         Create account
       </h2>
     </div>
-    <form class="mt-8 space-y-6">
+    <form [formGroup]="formData" class="mt-8 space-y-6" (ngSubmit)="addUser()">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
           <label for="name" class="sr-only">Your Name</label>
           <input
             id="name"
-            name="name"
             type="text"
-            autocomplete="name"
-            required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
             placeholder="Your Name"
+            formControlName="fullName"
           />
+          <div
+            *ngIf="fullName?.invalid && fullName?.touched"
+            class="text-red-500 text-xs"
+          >
+            Name is required and should be at least 3 characters long.
+          </div>
         </div>
         <div class="mt-4">
           <label for="email-address" class="sr-only">Email address</label>
           <input
             id="email-address"
-            name="email"
             type="email"
-            autocomplete="email"
-            required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
             placeholder="Email address"
+            formControlName="email"
           />
+          <div
+            *ngIf="email?.invalid && email?.touched"
+            class="text-red-500 text-xs"
+          >
+            Please enter a valid email address.
+          </div>
         </div>
         <div class="mt-4">
           <label for="password" class="sr-only">Password</label>
           <input
             id="password"
-            name="password"
             type="password"
-            autocomplete="current-password"
-            required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
             placeholder="Password"
+            formControlName="password"
           />
+          <div
+            *ngIf="password?.invalid && password?.touched"
+            class="text-red-500 text-xs"
+          >
+            Password must be at least 7 characters long.
+          </div>
         </div>
+
         <div class="mt-4">
           <label for="password-confirm" class="sr-only"
             >Re-enter Password</label
           >
           <input
             id="password-confirm"
-            name="password-confirm"
             type="password"
-            required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
             placeholder="Re-enter Password"
+            formControlName="rePassword"
           />
+          <div
+            *ngIf="passwordMismatch() && rePassword?.touched"
+            class="text-red-500 text-xs"
+          >
+            Passwords do not match.
+          </div>
         </div>
       </div>
-
       <div>
         <button
+          [disabled]="formData.invalid || passwordMismatch()"
           type="submit"
           class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
         >
@@ -87,9 +106,57 @@
     </p>
     <p class="mt-6 text-center text-sm text-gray-600">
       Already have an account?
-      <a href="#" class="font-medium text-yellow-500 hover:text-yellow-600"
+      <a
+        routerLink="/login"
+        class="font-medium text-yellow-500 hover:text-yellow-600"
         >Sign-In</a
       >
     </p>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="bg-white mt-12 py-8 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto text-center space-y-4">
+    <div class="border-t border-gray-300 my-4"></div>
+
+    <div class="text-sm text-gray-600">
+      <ul class="flex justify-center space-x-6">
+        <li>
+          <a
+            class="text-yellow-600 hover:text-yellow-700"
+            target="_blank"
+            rel="noopener"
+            href="/gp/help/customer/display.html/ref=ap_desktop_footer_cou?ie=UTF8&amp;nodeId=201909000"
+          >
+            Conditions of Use
+          </a>
+        </li>
+        <li>
+          <a
+            class="text-yellow-600 hover:text-yellow-700"
+            target="_blank"
+            rel="noopener"
+            href="/gp/help/customer/display.html/ref=ap_desktop_footer_privacy_notice?ie=UTF8&amp;nodeId=201909010"
+          >
+            Privacy Notice
+          </a>
+        </li>
+        <li>
+          <a
+            class="text-yellow-600 hover:text-yellow-700"
+            target="_blank"
+            rel="noopener"
+            href="/help"
+          >
+            Help
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="text-xs text-gray-500">
+      ©1996–2024, Amazon.com, Inc. or its affiliates
+    </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
+import { AuthGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -11,7 +12,7 @@ export const routes: Routes = [
         component :MainLayoutComponent,
         children:[
             {path: '', component: HomeComponent},
-            {path: 'wishlist', component: WishlistComponent}
+            {path: 'wishlist', component: WishlistComponent, canActivate:[AuthGuard]}
         ]
     },
     { path: "login", component: LoginComponent }, 

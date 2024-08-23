@@ -10,4 +10,8 @@ export class AuthService {
   logIn(user: LogUser) { 
     console.log(user);
   }
+
+  signUp (user: any) { 
+    console.log(user)
+  }
 }

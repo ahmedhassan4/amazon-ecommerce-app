@@ -22,6 +22,7 @@ export class LoginComponent {
        this.authServ.logIn(this.formData).subscribe(response => {
         localStorage.setItem("access-token" , response.token)
         this.authMessage = "login successful !"
+        this.authServ.user.next(true)
         setTimeout(() => { 
         this.router.navigate(["/"]);
         }, 2000)

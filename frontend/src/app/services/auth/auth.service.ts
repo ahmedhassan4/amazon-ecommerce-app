@@ -7,26 +7,31 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private signUpUrl = 'http://localhost:8888'; // End Point For Signup
+  // private baseUrl = 'http://localhost:3000/api/v1'; // backend url
+  private baseUrl = 'http://localhost:8888'; // backend url
 
   constructor(private http: HttpClient) {}
 
   // Log in method 
-  logIn(user: any): void {
-    console.log(user);
+  logIn(user: any): Observable<any>{
+    const url =`${this.baseUrl}/signin` //sign in end point
+
+
+    //  const headers = new HttpHeaders({ //set header if you needed
+    //   'Content-Type': 'application/json',
+    // });
+    
+    return this.http.post<any>(url, user) //post data to end point sing in
   }
 
   // Sign up method
   signUp(user: any): Observable<any> {
-    const url = `${this.signUpUrl}/signup`;
-
-    // Set headers if needed
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    // Post request
-    return this.http.post<any>(url, user, { headers })
+    const url = `${this.baseUrl}/signup`; //sign up end point
+ 
+    // const headers = new HttpHeaders({   // Set headers if needed
+    //   'Content-Type': 'application/json',
+    // });
+   
+    return this.http.post<any>(url, user) // Post request
   }
-
 }

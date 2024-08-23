@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "Name": "Electronics"
+    },
+
+    {
+      "Name": " Women's Fashion "
+    },
+
+    {
+      "Name": " Men's Fashion"
+    },
+
+    {
+      "Name": "Kids Fashion"
+    },
+    {
+      "name": "Books"
+    },
+    {
+      "name": "Toys"
+    },
+    {
+      "name": "Sports Equipment"
+    },
+    {
+      "name": "Beauty Products"
+    },
+    {
+      "name": "Furniture"
+    }
+  ]
+}

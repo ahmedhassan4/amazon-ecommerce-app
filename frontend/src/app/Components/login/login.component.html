@@ -15,6 +15,21 @@
         Sign in
       </h2>
     </div>
+
+    <!--display error message-->
+    <div *ngIf="authMessage" class="mt-4 text-center">
+      <p
+        [ngClass]="{
+          'text-green-500': authMessage.includes('successful'),
+          'text-red-500': authMessage.includes('invalid')
+        }"
+        class="text-sm font-medium"
+      >
+        {{ authMessage }}
+      </p>
+    </div>
+
+
     <form (ngSubmit)="addUser()" #loginForm="ngForm" class="mt-8 space-y-6">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>

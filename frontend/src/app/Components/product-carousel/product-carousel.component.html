@@ -1,0 +1,15 @@
+<p-carousel class="" [value]="products" [numVisible]="3" [numScroll]="3" [circular]="true" [autoplayInterval]="3000">
+    <ng-template pTemplate="item" let-product>
+      <div class="product-item mx-2 bg-slate-50 h-full p-5 rounded">
+        <div class="product-image w-[150px] max-h-[200px]">
+          <img [src]="product.image" [alt]="product.title">
+        </div>
+        <div class="product-details">
+          <h4>{{ product.title }}</h4>
+          <p>\${{ product.price }}</p>
+            <button class="px-5 py-3 text-white rounded my-5 bg-blue-600">Buy Now</button>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  

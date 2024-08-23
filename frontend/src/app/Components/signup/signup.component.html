@@ -14,6 +14,20 @@
         Create account
       </h2>
     </div>
+
+    <!-- Display signup message -->
+    <div *ngIf="authMessage" class="mt-4 text-center">
+      <p
+        [ngClass]="{
+          'text-green-500': authMessage.includes('successful'),
+          'text-red-500': authMessage.includes('failed')
+        }"
+        class="text-sm font-medium"
+      >
+        {{ authMessage }}
+      </p>
+    </div>
+
     <form [formGroup]="formData" class="mt-8 space-y-6" (ngSubmit)="addUser()">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>

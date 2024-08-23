@@ -1,14 +1,21 @@
-.slider {
-    display: flex;
-    transform: translateX(0);
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slider-nav {
-    cursor: pointer;
-  }
-  
-  .slider-nav.active {
-    background-color: #ff9900;
-  }
-  
+.carousel-container {
+  padding: 2rem;
+}
+
+.product-item {
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.product-image img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.product-detail {
+  margin-top: 1rem;
+}
+/*   */
+

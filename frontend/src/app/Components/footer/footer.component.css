@@ -1,0 +1,3 @@
+footer {
+    z-index: 100; /* Should be lower than the dialog's z-index */
+  }

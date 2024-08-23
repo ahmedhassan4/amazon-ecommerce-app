@@ -1,0 +1,12 @@
+<div class="product-card grid grid-cols-2 gap-4 ">
+    @for (product of products; track $index) {
+        <div  class="product-item shadow-md">
+            <img [src]="product.image" [alt]="product.title" class="w-full h-auto">
+            <h5 class="text-center">
+              {{ product.title.split(' ').slice(0, 3).join(' ') + (product.title.split(' ').length > 3 ? '...' : '') }}
+            </h5>
+          </div>
+    }
+
+  </div>
+  

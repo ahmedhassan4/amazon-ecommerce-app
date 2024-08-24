@@ -17,11 +17,11 @@ export const routes: Routes = [
         component :MainLayoutComponent,
         children:[
             {path: '', component: HomeComponent},
-            {path: 'wishlist', component: WishlistComponent},
+            {path: 'wishlist', component: WishlistComponent, canActivate:[AuthGuard]},
             { path: 'products', component: AllProductComponent },
             { path: 'details/:id', component: ProductDetailsComponent },
-            { path: 'checkout', component: CheckoutComponent },
-            { path: 'cart', component: CartComponent },
+            { path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard] },
+            { path: 'cart', component: CartComponent,canActivate:[AuthGuard] },
          
 
         ]

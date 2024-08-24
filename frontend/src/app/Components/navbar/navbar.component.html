@@ -1,53 +1,69 @@
 <nav class="bg-[#131a22] text-white px-6 py-3">
-    <div class="container mx-auto flex items-center justify-between">
-      <a routerLink="/" class="text-2xl font-bold">
-        <img src="Amazon_logo.svg" alt="Amazon Logo" class="h-8 text-white">
-      </a>
-  
-      <div class="flex-grow flex items-center mx-4 max-w-2xl">
-        <div class="relative flex items-center w-full">
-          <div class="relative flex items-center mr-2">
-            <select
-              class="bg-gray-300 text-gray-600 px-4 py-2 rounded-md border border-gray-500 focus:outline-none"
-              (change)="onCategoryChange($event)"
-            >
-              <option value="">All Categories</option>
-              <option value="electronics">Electronics</option>
-              <option value="jewelery">Jewelry</option>
-              <option value="men's clothing">Men's Clothing</option>
-              <option value="women's clothing">Women's Clothing</option>
-            </select>
-          </div>
-  
-          <div class="flex flex-grow">
-            <input
-              type="text"
-              placeholder="Search"
-              class="flex-grow px-4 py-2 rounded-l-md focus:outline-none bg-white text-gray-700 border border-gray-300"
-              #searchInput
-            />
-            <button
-              class="bg-orange-300 text-gray-800 px-4 py-2 rounded-r-md border border-gray-300"
-              (click)="updateSearchText(searchInput)"
-            >
-              <i class="fas fa-search fa-lg"></i>
-            </button>
-          </div>
+  <div class="container mx-auto flex items-center justify-between">
+    <a routerLink="/" class="text-2xl font-bold">
+      <img src="Amazon_logo.svg" alt="Amazon Logo" class="h-8 text-white" />
+    </a>
+
+    <div class="flex-grow flex items-center mx-4 max-w-2xl">
+      <div class="relative flex items-center w-full">
+        <div class="relative flex items-center mr-2">
+          <select
+            class="bg-gray-300 text-gray-600 px-4 py-2 rounded-md border border-gray-500 focus:outline-none"
+            (change)="onCategoryChange($event)"
+          >
+            <option value="">All Categories</option>
+            <option value="electronics">Electronics</option>
+            <option value="jewelery">Jewelry</option>
+            <option value="men's clothing">Men's Clothing</option>
+            <option value="women's clothing">Women's Clothing</option>
+          </select>
+        </div>
+
+        <div class="flex flex-grow">
+          <input
+            type="text"
+            placeholder="Search"
+            class="flex-grow px-4 py-2 rounded-l-md focus:outline-none bg-white text-gray-700 border border-gray-300"
+            #searchInput
+          />
+          <button
+            class="bg-orange-300 text-gray-800 px-4 py-2 rounded-r-md border border-gray-300"
+            (click)="updateSearchText(searchInput)"
+          >
+            <i class="fas fa-search fa-lg"></i>
+          </button>
         </div>
       </div>
-  
-      <div class="flex items-center space-x-4">
-        <a routerLink="login" class="text-sm leading-none">Hello, Sign in<br><br><span class="font-bold">Account & Lists</span></a>
-        <a routerLink="" class="text-sm leading-none">Returns<br><span class="font-bold">Orders</span></a>
-        <a routerLink="cart" class="relative">
-          <i class="fas fa-shopping-cart text-2xl"></i>
-          <span class="absolute -top-2 -right-2 bg-[#febd69] text-black rounded-full text-xs px-2">{{ cartItemCount }}</span>
-        </a>
-      </div>
     </div>
-  
-    <div class="lg:hidden mt-4">
-      <input type="text" placeholder="Search" class="w-full p-2 text-black">
+
+    <div class="flex items-center space-x-4">
+      @if(isLogged){
+      <a (click)="logOut()" role="button" class="text-sm leading-none"
+        >Hello, Logout<br /><br /><span class="font-bold"
+          >Account & Lists</span
+        ></a
+      >
+      }@else {
+      <a routerLink="login" class="text-sm leading-none"
+        >Hello, Sign in<br /><br /><span class="font-bold"
+          >Account & Lists</span
+        ></a
+      >
+      }
+      <a routerLink="" class="text-sm leading-none"
+        >Returns<br /><span class="font-bold">Orders</span></a
+      >
+      <a routerLink="cart" class="relative">
+        <i class="fas fa-shopping-cart text-2xl"></i>
+        <span
+          class="absolute -top-2 -right-2 bg-[#febd69] text-black rounded-full text-xs px-2"
+          >{{ cartItemCount }}</span
+        >
+      </a>
     </div>
-  </nav>
-  
+  </div>
+
+  <div class="lg:hidden mt-4">
+    <input type="text" placeholder="Search" class="w-full p-2 text-black" />
+  </div>
+</nav>

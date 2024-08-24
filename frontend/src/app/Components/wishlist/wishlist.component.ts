@@ -13,7 +13,7 @@ export class WishlistComponent implements OnInit  {
   isLoggedIn!:boolean
   constructor(private authServ : AuthService) { }
   ngOnInit(): void {
-  this.authServ.getUserState().subscribe(state => console.log(state))
+  this.authServ.getUserState().subscribe(state => this.isLoggedIn = state)
 }
   wishlist = [
     {
@@ -47,5 +47,4 @@ export class WishlistComponent implements OnInit  {
     console.log('Move to cart:', item);
     this.removeFromWishlist(item.id);
   }
-
 }

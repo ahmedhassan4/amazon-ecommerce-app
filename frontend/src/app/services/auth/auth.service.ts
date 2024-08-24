@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   user: BehaviorSubject<boolean>;
+
+  
   // private baseUrl = 'http://localhost:3000/api/v1'; // backend url
   private baseUrl = 'http://localhost:8888'; // backend url
 
@@ -35,7 +37,6 @@ export class AuthService {
   logOut() { 
     localStorage.removeItem("access-token");
     this.user.next(false);
-
   }
 
   // LocalStorage checking

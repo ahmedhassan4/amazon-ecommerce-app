@@ -1,7 +1,11 @@
 .carousel-container {
   padding: 2rem;
 }
-
+.carousel-section{
+  background-image: url('../../../../public/landing.jpg');
+  object-fit: cover;
+  background-size: cover;
+}
 .product-item {
   text-align: center;
   padding: 1rem;

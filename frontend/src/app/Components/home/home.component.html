@@ -1,8 +1,13 @@
 <div class=" m-auto mb-16 ">
-  <div class="carousel-section bg-slate-200 py-32">
-    <app-product-carousel></app-product-carousel>
+  <div class="carousel-section text-center h-[500px] py-32">
+    <button class="mt-32 mr-20 bg-[#c898a6] hover:bg-[#fdc7d7] transition text-white px-10 py-5 rounded" 
+    [routerLink]="['/products']"
+    >shop Now</button>
   </div>
-  <div class="cards-section flex gap-5 my-32 container m-auto ">
+
+  <app-product-carousel></app-product-carousel>
+
+  <div class="cards-section flex gap-5 my-32 px-12 m-auto ">
     <app-product-card title="Gaming accessories" category="electronics"></app-product-card>
     <app-product-card category="men's clothing"></app-product-card>
     <app-product-card category="women's clothing"></app-product-card>

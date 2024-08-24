@@ -49,7 +49,7 @@ export class SignupComponent {
     }
 
     const formValue = { ...this.formData.value };
-    delete formValue.rePassword;  // Remove the rePassword field before sending
+    delete formValue.rePassword;  
 
     this.authServ.signUp(formValue).subscribe(
       response => {

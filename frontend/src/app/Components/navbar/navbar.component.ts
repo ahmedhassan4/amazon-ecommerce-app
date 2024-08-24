@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { SearchService } from '../../services/search.service';
 import { CategoryService } from '../../services/category.service';
 import { CartsService } from '../../services/carts.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,12 +12,17 @@ import { CartsService } from '../../services/carts.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private searchService: SearchService,
-    private cartService: CartsService
+    private cartService: CartsService,
+    private authService : AuthService,
+    private router : Router
   ) {}
+  
+  isLogged!:boolean;
+
   cartItemCount: number = 0;
   searchText: string = '';
 
@@ -36,7 +42,13 @@ export class NavbarComponent {
   ngOnInit(): void {
     this.cartService.getCartItemCount().subscribe(count => {
       this.cartItemCount = count;
+      this.authService.getUserState().subscribe(state => this.isLogged = state)
     });
+  }
+
+  logOut() { 
+    this.authService.logOut()
+    this.router.navigateByUrl("/")
   }
 
 }

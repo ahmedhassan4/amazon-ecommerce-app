@@ -1,54 +1,81 @@
+<!-- Top Banner Section -->
 <div
-  class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 bg-[#FAFAFA]"
->
-  @for(product of filteredProducts ; track product.id){
-  <a
-    [routerLink]="['/details', product.id]"
-    class="flex justify-center"
-    [ngClass]="{ block: true }"
-  >
-    <div class="bg-[#F2F2F2] shadow-sm overflow-hidden w-full max-w-xs">
-      <div class="relative">
-        <img
-          [src]="product.image"
-          [alt]="product.title"
-          class="w-full h-48 object-cover"
-        />
-      </div>
-      <div class="p-4">
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-gray-800 font-semibold">
-            <span class="text-sm text-gray-500 align-top">EGP</span>
-            <span class="text-3xl">{{ product.price | number : "1.0-0" }}</span>
-            <span class="text-sm text-gray-500 align-top">
-              {{ product.price | number : ".2-2" | slice : -3 }}
-            </span>
-          </span>
-        </div>
+  class="w-full h-64 bg-cover bg-center mb-8"
+  style="
+    background-image: url('https://img.freepik.com/free-photo/black-friday-elements-assortment_23-2149074076.jpg?w=1380&t=st=1724493144~exp=1724493744~hmac=217bc97af45d0e8807d51604da2f790c02148cb6691b79ad5c12e05787e72cfb');
+  "
+></div>
 
-        <h3
-          class="text-gray-900 font-semibold text-md truncate overflow-hidden whitespace-nowrap mb-2"
-        >
-          {{ product.title }}
-        </h3>
-        <div class="flex items-center mb-2">
-          <div class="flex items-center text-yellow-500">
-            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-              <i
-                class="fas fa-star"
-                [ngClass]="{
-                  'text-yellow-500': product.rating.rate >= star,
-                  'text-gray-300': product.rating.rate < star
-                }"
-              ></i>
-            </ng-container>
+<div class="flex">
+  <!-- Left Banner -->
+  <div
+    class="w-1/6 max-h-full bg-cover bg-center object-cover"
+    style="
+      background-image: url('https://www.solidbackgrounds.com/images/2048x2048/2048x2048-light-blue-solid-color-background.jpg');
+    "
+  ></div>
+
+  <!-- Main Content Area -->
+  <div class="w-5/6 p-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Products</h2>
+    <hr />
+    <hr />
+    <!-- Product Grid Section -->
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 bg-[#FAFAFA] mt-3"
+    >
+      @for(product of filteredProducts ; track product.id){
+      <a
+        [routerLink]="['/details', product.id]"
+        class="flex justify-center"
+        [ngClass]="{ block: true }"
+      >
+        <div class="bg-[#F2F2F2] shadow-sm overflow-hidden w-full max-w-xs">
+          <div class="relative">
+            <img
+              [src]="product.image"
+              [alt]="product.title"
+              class="w-full h-48 object-cover"
+            />
           </div>
-          <span class="text-gray-600 text-sm ml-2">{{
-            product.rating.count
-          }}</span>
+          <div class="p-4">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-gray-800 font-semibold">
+                <span class="text-sm text-gray-500 align-top">EGP</span>
+                <span class="text-3xl">{{
+                  product.price | number : "1.0-0"
+                }}</span>
+                <span class="text-sm text-gray-500 align-top">{{
+                  product.price | number : ".2-2" | slice : -3
+                }}</span>
+              </span>
+            </div>
+
+            <h3
+              class="text-gray-900 font-semibold text-md truncate overflow-hidden whitespace-nowrap mb-2"
+            >
+              {{ product.title }}
+            </h3>
+            <div class="flex items-center mb-2">
+              <div class="flex items-center text-yellow-500">
+                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                  <i
+                    class="fas fa-star"
+                    [ngClass]="{
+                      'text-yellow-500': product.rating.rate >= star,
+                      'text-gray-300': product.rating.rate < star
+                    }"
+                  ></i>
+                </ng-container>
+              </div>
+              <span class="text-gray-600 text-sm ml-2">{{
+                product.rating.count
+              }}</span>
+            </div>
+          </div>
         </div>
-      </div>
+      </a>
+      }
     </div>
-  </a>
-  }
+  </div>
 </div>

@@ -32,11 +32,11 @@ export class CartsService {
   }
   
   // Remove a product from the cart
-  removeProductFromCart(productId: number): void {
-    const updatedProducts = this.cartProductsSource.value.filter(item => item.product.id !== productId);
-    this.cartProductsSource.next(updatedProducts);
-    this.cartItemCountSubject.next(updatedProducts.length);
-  }
+  // removeProductFromCart(productId: number): void {
+  //   const updatedProducts = this.cartProductsSource.value.filter(item => item.product.id !== productId);
+  //   this.cartProductsSource.next(updatedProducts);
+  //   this.cartItemCountSubject.next(updatedProducts.length);
+  // }
   addProductToCart(product: IProduct): void {
     const currentProducts = this.cartProductsSource.value;
     const existingProduct = currentProducts.find(

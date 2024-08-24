@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 export const routes: Routes = [
   { path: 'products', component: AllProductComponent },
-  { path: 'details', component: ProductDetailsComponent },
+  { path: 'details/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', component: AllProductComponent },
 ];

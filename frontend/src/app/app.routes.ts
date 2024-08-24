@@ -4,6 +4,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
+import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { AuthGuard, LoggedGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
@@ -12,7 +13,8 @@ export const routes: Routes = [
         component :MainLayoutComponent,
         children:[
             {path: '', component: HomeComponent},
-            {path: 'wishlist', component: WishlistComponent, canActivate:[AuthGuard]}
+            {path: 'wishlist', component: WishlistComponent, canActivate:[AuthGuard]},
+            { path: 'checkout', component: CheckoutComponent },
         ]
     },
     { path: "login", component: LoginComponent, canActivate:[LoggedGuard] }, 

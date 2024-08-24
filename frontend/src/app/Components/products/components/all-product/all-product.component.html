@@ -1,8 +1,8 @@
 <div
   class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 bg-[#FAFAFA]"
 >
+  @for(product of filteredProducts ; track product.id){
   <a
-    *ngFor="let product of filteredProducts"
     [routerLink]="['/details', product.id]"
     class="flex justify-center"
     [ngClass]="{ block: true }"
@@ -50,4 +50,5 @@
       </div>
     </div>
   </a>
+  }
 </div>

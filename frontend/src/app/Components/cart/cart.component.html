@@ -4,10 +4,8 @@
     <div class="p-4">
       <h5 class="text-2xl font-bold text-gray-800 mb-4">Shopping Cart</h5>
       <div class="space-y-4">
-        <div
-          *ngFor="let item of cartProducts; let $index = index"
-          class="flex items-center border-b border-gray-300 pb-4 mb-4"
-        >
+        @for(item of cartProducts ; track $index){
+        <div class="flex items-center border-b border-gray-300 pb-4 mb-4">
           <!-- Product Image -->
           <div class="w-1/4">
             <img
@@ -57,6 +55,7 @@
             </div>
           </div>
         </div>
+        }
       </div>
     </div>
   </div>

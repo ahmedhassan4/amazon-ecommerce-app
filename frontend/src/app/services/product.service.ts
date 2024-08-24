@@ -30,4 +30,10 @@ export class ProductService {
   getProductById(id: number): Observable<IProduct> {
     return this.http.get<IProduct>(`${this.baseUrl}/${id}`);
   }
+
+  rateProduct(productId: number, rating: number): Observable<IProduct> {
+    return this.http.post<IProduct>(`${this.baseUrl}/${productId}/rate`, {
+      rating,
+    });
+  }
 }

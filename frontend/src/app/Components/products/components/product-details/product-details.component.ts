@@ -48,4 +48,19 @@ export class ProductDetailsComponent implements OnInit {
     this.cartService.addProductToCart(this.data);
     // console.log('Product added to cart:', this.data);
   }
+  // rateProduct(rating: number): void {
+  //   // Update the product rating and count
+  //   const newCount = this.data.rating.count + 1;
+  //   const newRate =
+  //     (this.data.rating.rate * this.data.rating.count + rating) / newCount;
+
+  //   // Update the product's data with the new rating
+  //   this.data.rating.rate = newRate;
+  //   this.data.rating.count = newCount;
+  // }
+
+  rateProduct(rating: number): void {
+    this.data.rating.rate = rating;
+    this.data.rating.count += 1;
+  }
 }

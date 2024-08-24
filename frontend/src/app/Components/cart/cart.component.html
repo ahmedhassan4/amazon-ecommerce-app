@@ -37,9 +37,23 @@
               }}
             </span>
             <div class="flex items-center space-x-4">
-              <span class="text-gray-500 text-sm"
-                >Quantity: {{ item.quantity }}</span
-              >
+              <div class="flex items-center">
+                <button
+                  class="bg-gray-300 text-gray-800 px-2 py-1 rounded-l hover:bg-gray-400 text-xs"
+                  (click)="decreaseQuantity(item.product.id)"
+                >
+                  -
+                </button>
+                <span class="text-gray-800 text-sm px-2">{{
+                  item.quantity
+                }}</span>
+                <button
+                  class="bg-gray-300 text-gray-800 px-2 py-1 rounded-r hover:bg-gray-400 text-xs"
+                  (click)="increaseQuantity(item.product.id)"
+                >
+                  +
+                </button>
+              </div>
               <button
                 class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-xs"
                 (click)="removeProduct(item.product.id)"

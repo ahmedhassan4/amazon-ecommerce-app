@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IProduct } from '../models/Iproduct';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +19,6 @@ export class CartsService {
   }
 
   private loadCartItems(): void {
-    // Load cart items from local storage or another source
     this.cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
     this.updateCartItemCount();
   }
@@ -51,6 +51,32 @@ export class CartsService {
     this.cartProductsSource.next(currentProducts);
     this.updateCartItemCount();
     this.saveCartItems();
+  }
+
+  increaseQuantity(productId: number): void {
+    const currentProducts = this.cartProductsSource.value;
+    const product = currentProducts.find(
+      (item) => item.product.id === productId
+    );
+    if (product) {
+      product.quantity += 1;
+      this.cartProductsSource.next([...currentProducts]);
+      this.updateCartItemCount();
+      this.saveCartItems();
+    }
+  }
+
+  decreaseQuantity(productId: number): void {
+    const currentProducts = this.cartProductsSource.value;
+    const product = currentProducts.find(
+      (item) => item.product.id === productId
+    );
+    if (product && product.quantity > 1) {
+      product.quantity -= 1;
+      this.cartProductsSource.next([...currentProducts]);
+      this.updateCartItemCount();
+      this.saveCartItems();
+    }
   }
 
   private updateCartItemCount(): void {

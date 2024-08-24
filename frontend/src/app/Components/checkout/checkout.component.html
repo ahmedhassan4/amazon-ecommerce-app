@@ -1,38 +1,76 @@
-<!-- checkout.component.html -->
-<div class="container mx-auto p-4">
-    <div class="flex">
-      <!-- Checkout Form -->
-      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="w-1/2 p-4 bg-gray-100 rounded-lg shadow-md">
-        <h2 class="text-2xl font-semibold mb-4">Checkout</h2>
-        <div class="mb-4">
-          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-          <input id="name" formControlName="name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-          <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched" class="text-red-600 text-sm">
-            Name is required
-          </div>
-        </div>
-        <div class="mb-4">
-          <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-          <input id="address" formControlName="address" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-          <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched" class="text-red-600 text-sm">
-            Address is required
-          </div>
-        </div>
-        <button type="submit" [disabled]="checkoutForm.invalid" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md">Pay with Stripe</button>
-      </form>
+<div class="max-w-6xl my-16 mx-auto p-6 bg-white shadow-lg rounded-lg grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Left Part: Form -->
+    <div>
+      <h2 class="text-2xl font-bold mb-6">Checkout</h2>
   
-      <!-- Cart Items -->
-      <div class="w-1/2 p-4 bg-gray-100 rounded-lg shadow-md ml-4">
-        <h2 class="text-2xl font-semibold mb-4">Cart Items</h2>
-        <div *ngFor="let item of cartItems" class="flex justify-between mb-2">
-          <span>{{ item.name }} ({{ item.quantity }})</span>
-          <span>\${{ item.price * item.quantity | number:'1.2-2' }}</span>
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <div class="form-group">
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input id="name" formControlName="name" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your full name">
         </div>
-        <div class="flex justify-between mt-2 font-semibold">
-          <span>Total:</span>
-          <span>\${{ totalPrice | number:'1.2-2' }}</span>
+  
+        <div class="form-group">
+          <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+          <input id="address" formControlName="address" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your shipping address">
+        </div>
+  
+        <div class="form-group">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input id="email" formControlName="email" type="email" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your email address">
+        </div>
+  
+        <div class="form-group">
+          <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input id="phone" formControlName="phone" type="tel" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Your phone number">
+        </div>
+  
+        <div class="form-group">
+          <label for="paymentMethod" class="block text-sm font-medium text-gray-700">Payment Method</label>
+          <select id="paymentMethod" formControlName="paymentMethod" class="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            <option value="creditCard">Credit Card</option>
+            <option value="paypal">PayPal</option>
+            <option value="cashOnDelivery">Cash on Delivery</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Right Part: Cart Items and Payment -->
+    <div>
+      <h3 class="text-xl font-semibold mb-4">Your Cart</h3>
+  
+      <div class="cart-items-container max-h-64 overflow-y-auto border border-gray-300 rounded-md p-4 bg-gray-50">
+        <ul class="space-y-4">
+          <li *ngFor="let item of cartItems" class="flex justify-between items-center border-b pb-4">
+            <div>
+              <p class="font-semibold text-gray-800">{{ item.product.title }}</p>
+              <p class="text-gray-600">{{ item.quantity }} x ${{ item.product.price }}</p>
+            </div>
+            <p class="font-semibold text-gray-800">${{ item.product.price * item.quantity }}</p>
+          </li>
+        </ul>
+      </div>
+  
+      <div class="mt-4">
+        <label for="coupon" class="block text-sm font-medium text-gray-700">Apply Coupon</label>
+        <div class="flex mt-1">
+          <input id="coupon" [(ngModel)]="couponCode" class="block w-full p-3 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter coupon code">
+          <button (click)="applyCoupon()" class="px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-r-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
+            Apply
+          </button>
         </div>
       </div>
+  
+      <div class="flex justify-between items-center mt-6">
+        <h3 class="text-xl font-semibold">Total Price:</h3>
+        <p class="text-xl font-bold text-gray-800">${{ totalPrice }}</p>
+      </div>
+  
+      <button (click)="checkout()"
+      [disabled]="checkoutForm.invalid"
+      class="w-full py-3 px-6 mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
+        Pay with Stripe
+      </button>
     </div>
   </div>
   

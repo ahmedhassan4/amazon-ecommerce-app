@@ -2,6 +2,7 @@
 @import 'primeng/resources/themes/saga-blue/theme.css';
 @import 'primeng/resources/primeng.min.css';
 @import 'primeicons/primeicons.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 @tailwind base;
 @tailwind components;
@@ -9,3 +10,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.customSnackbar {
+    background: #0e0e0edd;
+    color: #14c45b !important; 
+    font-size: 16px !important; 
+    border-radius: 4px !important; 
+    padding: 16px !important;
+  }

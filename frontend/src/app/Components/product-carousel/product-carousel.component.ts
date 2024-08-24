@@ -12,11 +12,12 @@ import { CartsService } from '../../services/carts.service';
 import { MessageService } from 'primeng/api'; 
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-carousel',
   standalone: true,
-  imports: [CommonModule, CarouselModule,ToastModule, ButtonModule, RippleModule],
+  imports: [CommonModule, CarouselModule,ToastModule,MatSnackBarModule, ButtonModule, RippleModule],
   templateUrl: './product-carousel.component.html',
   styleUrls: ['./product-carousel.component.css'],
   providers: [MessageService] 
@@ -36,7 +37,7 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private searchService: SearchService,
     private cartService: CartsService,
-    private messageService: MessageService // Inject MessageService
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -114,15 +115,36 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   }
 
   addToCart(product: IProduct): void {
-    this.cartService.addProductToCart(product);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Product added to cart'
-    });
-    console.log('Product added to cart:', product);
-  } 
+    if (this.cartService.isProductInCart(product.id)) {
+      this.cartService.removeProductFromCart(product.id);
+      this.snackBar.open('Item removed from cart!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: 'customSnackbar'
+      });
+    } else {
+      this.cartService.addProductToCart(product);
+      this.snackBar.open('Item added to cart successfully!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: 'customSnackbar'
+      });
+    }
+    this.applyFilters(); 
+  }
+
+  isProductInCart(productId: number): boolean {
+    return this.cartService.isProductInCart(productId);
+  }
+
   show() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
-}
+    this.snackBar.open('Item added to cart successfully!', 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: 'customSnackbar'
+    });
+  }
 }

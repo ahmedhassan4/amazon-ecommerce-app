@@ -23,4 +23,10 @@
   .product-detail {
     margin-top: 1rem;
   }
-  
+  .customSnackbar {
+    background-color: #990e0e; /* Dark background */
+    color: #14c45b; /* White text */
+    font-size: 16px; /* Custom font size */
+    border-radius: 40px; /* Rounded corners */
+    padding: 120px; /* Padding inside snackbar */
+  }

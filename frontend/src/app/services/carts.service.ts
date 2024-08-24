@@ -24,6 +24,16 @@ export class CartsService {
     return this.cartItemCountSubject.asObservable();
   }
 
+  isProductInCart(productId: number): boolean {
+    return this.cartProductsSource.value.some(item => item.product.id === productId);
+  }
+  
+  // Remove a product from the cart
+  removeProductFromCart(productId: number): void {
+    const updatedProducts = this.cartProductsSource.value.filter(item => item.product.id !== productId);
+    this.cartProductsSource.next(updatedProducts);
+    this.cartItemCountSubject.next(updatedProducts.length);
+  }
   addProductToCart(product: IProduct): void {
     const currentProducts = this.cartProductsSource.value;
     const existingProduct = currentProducts.find(item => item.product.id === product.id);

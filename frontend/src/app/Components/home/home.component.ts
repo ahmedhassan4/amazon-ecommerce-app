@@ -9,14 +9,18 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink,ProductCarouselComponent, ProductCardComponent,ElectronicsSectionComponent,ClothingSectionComponent,TopBrandsSectionComponent],
+  imports: [
+    RouterLink,
+    ProductCarouselComponent,
+    ProductCardComponent,
+    ElectronicsSectionComponent,
+    ClothingSectionComponent,
+    TopBrandsSectionComponent
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
-
 export class HomeComponent {
-  currentSlide = 0;
-  totalSlides = 3;
 
-
+  
 }

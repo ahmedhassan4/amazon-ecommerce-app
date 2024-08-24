@@ -1,0 +1,19 @@
+ <div class="container">
+ <div class="card" style="width: 18rem;">
+        <img class="card-img-top" [src]="product.image" alt="Card image cap">
+        <div class="card-body">
+            <p>{{ product.title }}</p>
+              <!-- currency pipe -->
+            <p>{{ product.price |currency:'EUR':true}}</p>
+            <p>{{ product.description }}</p>
+            <p>{{ product.category }}</p>
+    
+           <!-- rating.rate  -->
+            <p>{{ product.rating.rate }}</p>
+            <p>{{ product.rating.count }}</p>
+        
+             
+        </div>
+      </div> 
+</div> 
+ 

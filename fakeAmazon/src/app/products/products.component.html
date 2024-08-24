@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="input-group mb-3">
+    <input
+      #category
+      type="text"
+      class="form-control"
+      placeholder="  Search of Products By Category"
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="sort('asc')"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          Filter By Category
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <!-- <button ngbDropdownItem (click)="filter()">default</button> -->
+          <button ngbDropdownItem (click)="filter('men\'s clothing')">
+            men's clothing
+          </button>
+          <button ngbDropdownItem (click)="filter('jewelery')">jewelery</button>
+          <button ngbDropdownItem (click)="filter('electronics')">
+            electronics
+          </button>
+          <button ngbDropdownItem (click)="filter('women\'s clothing')">
+            women's clothing
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="dropdownBasic1"
+          ngbDropdownToggle
+        >
+          Sort By Price
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem (click)="sort('asc')">Sort Asc</button>
+          <button ngbDropdownItem (click)="sort('desc')">Sort Desc</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @for (product of allProducts; track product.id) {
+
+  <app-product [product]="product"></app-product>
+
+  }
+</div>

@@ -4,8 +4,8 @@ import { HomeComponent } from './Components/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { WishlistComponent } from './Components/wishlist/wishlist.component';
-import { AuthGuard } from './guard/auth.guard';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { AuthGuard, LoggedGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -17,6 +17,6 @@ export const routes: Routes = [
             { path: 'checkout', component: CheckoutComponent },
         ]
     },
-    { path: "login", component: LoginComponent }, 
-    { path: "signup" , component: SignupComponent }
+    { path: "login", component: LoginComponent, canActivate:[LoggedGuard] }, 
+    { path: "signup" , component: SignupComponent, canActivate:[LoggedGuard] }
 ];

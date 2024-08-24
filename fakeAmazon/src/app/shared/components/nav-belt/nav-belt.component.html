@@ -1,49 +1,49 @@
 <nav class="bg-[#131921] px-4 py-2">
   <div class="flex items-center justify-between">
-    <!-- Left section: Logo and delivery info -->
     <div class="flex items-center space-x-4">
       <img src="amazonLogo.svg" alt="Logo" class="h-8" />
     </div>
-
-    <!-- Middle section: Search bar with filter dropdown -->
     <div class="flex-grow flex items-center mx-4 max-w-2xl">
       <div class="relative flex items-center w-full">
-        <!-- Filter Dropdown -->
         <div class="relative flex items-center mr-2">
           <select
             class="bg-gray-300 text-gray-600 px-4 py-2 rounded-md border border-gray-500 focus:outline-none"
+            (change)="onCategoryChange($event)"
           >
             <option value="">All Categories</option>
             <option value="electronics">Electronics</option>
-            <option value="fashion">Fashion</option>
-            <option value="home">Home</option>
-            <!-- Add more categories as needed -->
+            <option value="jewelery">Jewelry</option>
+            <option value="men's clothing">Men's Clothing</option>
+            <option value="women's clothing">Women's Clothing</option>
           </select>
         </div>
 
-        <!-- Search Input and Button -->
         <div class="flex flex-grow">
           <input
             type="text"
             placeholder="Search"
             class="flex-grow px-4 py-2 rounded-l-md focus:outline-none bg-white text-gray-700 border border-gray-300"
+            #searchInput
           />
           <button
             class="bg-orange-300 text-gray-800 px-4 py-2 rounded-r-md border border-gray-300"
+            (click)="updateSearchText(searchInput)"
           >
             <i class="fas fa-search fa-lg"></i>
           </button>
         </div>
       </div>
     </div>
-
-    <!-- Right section: Language, Account, Orders, Cart -->
     <div class="flex items-center space-x-4 text-white text-sm">
-      <div class="flex items-center">
+      <a
+        routerLink="/cart"
+        class="flex items-center"
+        style="pointer-events: auto"
+      >
         <i class="fas fa-shopping-cart fa-lg"></i>
         <span class="ml-1">Cart</span>
         <span class="ml-1 text-yellow-400">0</span>
-      </div>
+      </a>
     </div>
   </div>
 </nav>

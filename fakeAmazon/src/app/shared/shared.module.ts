@@ -6,4 +6,4 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [],
   imports: [CommonModule, HttpClientModule],
 })
-export class ProductsModule {}
+export class SharedModule {}

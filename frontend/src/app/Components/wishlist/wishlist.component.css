@@ -1,0 +1,6 @@
+h3 { 
+    color: gray;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

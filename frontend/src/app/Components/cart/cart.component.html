@@ -32,7 +32,9 @@
           </div>
           <div class="flex justify-between items-center mt-4">
             <span class="text-xl font-bold text-gray-800">
-              {{ getTotalPrice(item.product, item.quantity) }}
+              {{
+                getTotalPrice(item.product, item.quantity) | currency : "EGP "
+              }}
             </span>
             <div class="flex items-center space-x-4">
               <span class="text-gray-500 text-sm"
@@ -40,6 +42,7 @@
               >
               <button
                 class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 text-xs"
+                (click)="removeProduct(item.product.id)"
               >
                 <i class="fas fa-trash"></i> Remove
               </button>
@@ -54,8 +57,10 @@
   <div class="mt-8 bg-white shadow-md rounded-lg p-4 border border-gray-200">
     <h3 class="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
     <div class="flex justify-between mb-3">
-      <span class="text-gray-600">Subtotal (1 item):</span>
-      <span class="text-gray-800">EGP 47.00</span>
+      <span class="text-gray-600"
+        >Subtotal ({{ cartProducts.length }} items):</span
+      >
+      <span class="text-gray-800">{{ totalPrice | currency : "EGP " }}</span>
     </div>
     <div class="flex justify-between mb-3">
       <span class="text-gray-600">Shipping:</span>
@@ -63,7 +68,9 @@
     </div>
     <div class="flex justify-between mb-4">
       <span class="text-gray-800">Total:</span>
-      <span class="text-lg font-bold text-gray-900">EGP 47.00</span>
+      <span class="text-lg font-bold text-gray-900">{{
+        totalPrice | currency : "EGP "
+      }}</span>
     </div>
     <button
       class="bg-blue-500 text-white w-full py-1 rounded hover:bg-blue-600 text-sm"
@@ -72,6 +79,3 @@
     </button>
   </div>
 </div>
-
-<!-- FontAwesome for icons -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>

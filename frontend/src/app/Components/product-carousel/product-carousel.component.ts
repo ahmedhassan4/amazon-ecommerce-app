@@ -121,7 +121,7 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   addToCart(product: IProduct): void {
     // Check if the user is logged in
     if (!this.authService.isLogged) {
-      // Redirect to login page if not authenticated
+     
       this.router.navigate(['/login']);
       return;
     }

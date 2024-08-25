@@ -25,15 +25,18 @@
         </div>
         <div class="flex items-center mb-2">
           <div class="flex items-center text-yellow-500">
-            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-              <i
-                class="fas fa-star"
-                [ngClass]="{
-                  'text-yellow-500': product.rating.rate >= star,
-                  'text-gray-300': product.rating.rate < star
-                }"
-              ></i>
-            </ng-container>
+            @for (star of [1, 2, 3, 4, 5] ; track $index) {
+              <ng-container >
+                <i
+                  class="fas fa-star"
+                  [ngClass]="{
+                    'text-yellow-500': product.rating.rate >= star,
+                    'text-gray-300': product.rating.rate < star
+                  }"
+                ></i>
+              </ng-container>
+            }
+            
           </div>
           <span class="text-gray-600 text-sm ml-2">{{ product.rating.count }}</span>
         </div>

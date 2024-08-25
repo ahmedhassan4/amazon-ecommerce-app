@@ -41,13 +41,16 @@
   
       <div class="cart-items-container max-h-64 overflow-y-auto border border-gray-300 rounded-md p-4 bg-gray-50">
         <ul class="space-y-4">
-          <li *ngFor="let item of cartItems" class="flex justify-between items-center border-b pb-4">
+         @for (item of cartItems; track $index) {
+          <li  class="flex justify-between items-center border-b pb-4">
             <div>
               <p class="font-semibold text-gray-800">{{ item.product.title }}</p>
               <p class="text-gray-600">{{ item.quantity }} x ${{ item.product.price }}</p>
             </div>
             <p class="font-semibold text-gray-800">${{ item.product.price * item.quantity }}</p>
           </li>
+         }
+        
         </ul>
       </div>
   

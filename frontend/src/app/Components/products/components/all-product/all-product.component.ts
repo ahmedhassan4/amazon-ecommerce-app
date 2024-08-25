@@ -95,6 +95,7 @@ export class AllProductComponent implements OnInit, OnDestroy {
   }
 
 // wish list basita 5ales
+
   addToWishlist(prod: any) { 
     
     if(!this.isProdInWish(prod.id)){ 

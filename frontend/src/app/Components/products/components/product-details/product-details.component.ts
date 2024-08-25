@@ -49,7 +49,25 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.cartService.addProductToCart(this.data);
+
+    if(!this.isProdInCart(this.data.id)){
+      this.cartService.addProductToCart(this.data);
+      this.notification.open('Product added to Cart successfully!', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'right',
+        verticalPosition: "top",
+        panelClass: 'alert-red'
+      });
+    }else{ 
+      this.cartService.removeProductFromCart(this.data.id)
+      this.notification.open('Product remove to Cart successfully!', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'right',
+        verticalPosition: "top",
+        panelClass: 'alert-red'
+      });
+    };
+    
     // console.log('Product added to cart:', this.data);
   }
   // rateProduct(rating: number): void {
@@ -63,13 +81,20 @@ export class ProductDetailsComponent implements OnInit {
   //   this.data.rating.count = newCount;
   // }
 
+  isProdInCart(id:number): boolean {
+   return this.cartService.isProductInCart(id)
+  }
+
   rateProduct(rating: number): void {
+    let count = 0;
     this.data.rating.rate = rating;
-    this.data.rating.count += 1;
+    if(count < 1) { 
+      count +=1
+      this.data.rating.count += 1;
+    }
   }
 
   addToWishLish(prod: any) { 
-  
     if(!this.isProdInWish(prod.id)){ 
       this.wishlistService.addToWishList(prod)
       this.notification.open('Product added to wishlist successfully!', 'Close', {

@@ -32,6 +32,10 @@ export class WishlistService {
     this.saveWishList();
   }
 
+  isProdInWishlist(id: number) :boolean { 
+    return this.wishList.value.some((product) => product.id == id)
+  }
+
   private getWishFromLocal(): any[] {
     const wishlist = localStorage.getItem('wishlist');
     return wishlist ? JSON.parse(wishlist) : [];

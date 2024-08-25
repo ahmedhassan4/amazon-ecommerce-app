@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IProduct } from '../../../../models/Iproduct';
 import { CartsService } from '../../../../services/carts.service';
 import { ProductService } from '../../../../services/product.service';
+import { WishlistService } from '../../../../services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-product-details',
@@ -27,7 +28,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: ProductService,
-    private cartService: CartsService
+    private cartService: CartsService,
+    private wishlistService : WishlistService
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +64,9 @@ export class ProductDetailsComponent implements OnInit {
   rateProduct(rating: number): void {
     this.data.rating.rate = rating;
     this.data.rating.count += 1;
+  }
+
+  addToWishLish(prod: any) { 
+    this.wishlistService.addToWishList(prod)
   }
 }

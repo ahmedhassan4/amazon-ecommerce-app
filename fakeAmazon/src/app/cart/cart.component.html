@@ -1,0 +1,92 @@
+<div class="container mx-auto my-8 px-4 lg:flex lg:justify-between">
+  <!-- Cart Items -->
+  <div class="bg-white border border-gray-300 lg:w-3/5 lg:mr-8">
+    <div class="p-4">
+      <h5 class="text-2xl font-bold text-gray-800 mb-4">Shopping Cart</h5>
+      <div class="space-y-4">
+        @for(item of cartProducts ; track $index){
+        <div class="flex items-center border-b border-gray-300 pb-4 mb-4">
+          <!-- Product Image -->
+          <div class="w-1/4">
+            <img
+              [src]="item.product.image"
+              class="w-full h-24 object-cover rounded"
+              alt="{{ item.product.title }}"
+            />
+          </div>
+          <!-- Product Details -->
+          <div class="w-3/4 pl-4">
+            <h5
+              class="text-lg font-semibold text-gray-700 truncate"
+              title="{{ item.product.title }}"
+            >
+              {{ item.product.title }}
+            </h5>
+            <p class="text-gray-600 text-sm mt-1">
+              {{ item.product.description }}
+            </p>
+            <div class="flex justify-between items-center mt-2">
+              <span class="text-lg font-bold text-gray-700">{{
+                getTotalPrice(item.product, item.quantity) | currency : "EGP "
+              }}</span>
+              <div class="flex items-center space-x-2">
+                <div class="flex items-center">
+                  <button
+                    class="bg-gray-200 text-gray-600 px-2 py-1 rounded-l hover:bg-gray-300"
+                    (click)="decreaseQuantity(item.product.id)"
+                  >
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <span class="text-gray-700 px-2">{{ item.quantity }}</span>
+                  <button
+                    class="bg-gray-200 text-gray-600 px-2 py-1 rounded-r hover:bg-gray-300"
+                    (click)="increaseQuantity(item.product.id)"
+                  >
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </div>
+                <button
+                  class="bg-gray-200 text-gray-600 px-2 py-1 rounded hover:bg-gray-300"
+                  (click)="removeProduct(item.product.id)"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Summary -->
+  <div
+    class="bg-white border border-gray-300 mt-8 lg:mt-0 lg:w-2/5 lg:h-64 lg:sticky lg:top-8"
+  >
+    <div class="p-4">
+      <h5 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h5>
+      <div class="flex justify-between mb-3">
+        <span class="text-gray-600"
+          >Subtotal ({{ cartProducts.length }} items):</span
+        >
+        <span class="text-gray-700">{{ totalPrice | currency : "EGP " }}</span>
+      </div>
+      <div class="flex justify-between mb-3">
+        <span class="text-gray-600">Shipping:</span>
+        <span class="text-gray-700">EGP 0.00</span>
+      </div>
+      <div class="flex justify-between mb-4">
+        <span class="text-gray-700">Total:</span>
+        <span class="text-xl font-bold text-gray-900">{{
+          totalPrice | currency : "EGP "
+        }}</span>
+      </div>
+      <button
+        class="bg-gray-200 text-gray-700 w-full py-2 rounded hover:bg-gray-300"
+      >
+        <i class="fas fa-check-circle mr-2"></i>Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>

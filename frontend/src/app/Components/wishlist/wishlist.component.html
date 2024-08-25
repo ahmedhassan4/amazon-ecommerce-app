@@ -11,9 +11,15 @@
         <img
           class="w-full h-48 object-cover mb-4 rounded-md"
           [src]="item.image"
-          alt="{{ item.name }}"
+          alt="{{ item.title }}"
         />
-        <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
+        <h3
+          role="button"
+          [routerLink]="['/details', item.id]"
+          class="text-lg font-semibold text-gray-900"
+        >
+          {{ item.title }}
+        </h3>
         <p class="text-gray-500 mt-2">{{ item.description }}</p>
         <p class="text-yellow-600 font-bold mt-2">${{ item.price }}</p>
         <div class="mt-4 flex justify-between items-center">

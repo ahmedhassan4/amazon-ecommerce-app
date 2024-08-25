@@ -1,50 +1,34 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
+import { RouterModule } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { CartsService } from '../../services/carts.service';
+import { WishlistService } from '../../services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })
 export class WishlistComponent implements OnInit  {
   isLoggedIn!:boolean
-  constructor(private authServ : AuthService) { }
+  wishlist: any[] = [];
+
+  constructor(private wishlistService : WishlistService,private authServ : AuthService,private cartServive : CartsService) { }
   ngOnInit(): void {
-  this.authServ.getUserState().subscribe(state => this.isLoggedIn = state)
+  this.wishlistService.getWishList().subscribe(state => this.wishlist = state) //fill wishlist
+
 }
-  wishlist = [
-    {
-      id: 1,
-      name: 'Product Name 1',
-      description: 'Short product description goes here.',
-      price: 29.99,
-      image: 'https://m.media-amazon.com/images/I/51rF5TKzVTL._AC_SX522_.jpg'
-    },
-    {
-      id: 2,
-      name: 'Product Name 2',
-      description: 'Short product description goes here.',
-      price: 49.99,
-      image: 'https://m.media-amazon.com/images/I/817QL8-1+GL._AC_SX679_.jpg'
-    },  {
-      id: 3,
-      name: 'Product Name 3',
-      description: 'Short product description goes here.',
-      price: 29.99,
-      image: 'https://m.media-amazon.com/images/I/616for3q0ML._AC_SX679_.jpg'
-    }
-    // Add more items here...
-  ];
 
+//remove from wishlist
   removeFromWishlist(id: number) {
-    this.wishlist = this.wishlist.filter(item => item.id !== id);
+    this.wishlistService.removeFromWishList(id)
   }
-
+//move to cart
   moveToCart(item: any) {
-    console.log('Move to cart:', item);
-    this.removeFromWishlist(item.id);
+    this.cartServive.addProductToCart(item)
   }
 }

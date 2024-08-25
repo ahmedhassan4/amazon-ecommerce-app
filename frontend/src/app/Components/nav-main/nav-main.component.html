@@ -28,7 +28,9 @@
         routerLink="/wishlist"
         class="hover:text-gray-400"
       >
-        wishlist
+        wishlist @if(wishlist) {
+        {{ wishlist }}
+        }
       </a>
     </li>
   </div>

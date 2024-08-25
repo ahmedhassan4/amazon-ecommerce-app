@@ -5,6 +5,7 @@ import { IProduct } from '../../../../models/Iproduct';
 import { CartsService } from '../../../../services/carts.service';
 import { ProductService } from '../../../../services/product.service';
 import { WishlistService } from '../../../../services/wishlist/wishlist.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-details',
@@ -29,7 +30,8 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private service: ProductService,
     private cartService: CartsService,
-    private wishlistService : WishlistService
+    private wishlistService : WishlistService,
+    private notification : MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +69,20 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToWishLish(prod: any) { 
-    this.wishlistService.addToWishList(prod)
+  
+    if(!this.isProdInWish(prod.id)){ 
+      this.wishlistService.addToWishList(prod)
+      this.notification.open('Product added to wishlist successfully!', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'right',
+        verticalPosition: "top",
+        panelClass: 'alert-red'
+      });
+    }
+  }
+
+  isProdInWish(id: any) { 
+   return this.wishlistService.isProdInWishlist(id);
+   
   }
 }

@@ -4,6 +4,7 @@ import { SearchService } from '../../services/search.service';
 import { CategoryService } from '../../services/category.service';
 import { CartsService } from '../../services/carts.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { WishlistService } from '../../services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
     private searchService: SearchService,
     private cartService: CartsService,
     private authService : AuthService,
-    private router : Router
+    private router : Router,
   ) {}
   
   isLogged!:boolean;
@@ -51,4 +52,5 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl("/")
   }
 
+  
 }

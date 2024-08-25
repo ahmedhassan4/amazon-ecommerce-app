@@ -16,7 +16,7 @@
       <hr />
       <p class="text-lg text-gray-600">{{ data.category }}</p>
       <h2 class="text-2xl font-semibold text-green-600">
-        ${{ data.price.toFixed(2) }}
+        EGP {{ data.price.toFixed(2) }}
       </h2>
       <p class="text-base text-gray-700 leading-relaxed">
         {{ data.description }}
@@ -55,6 +55,7 @@
               'text-yellow-500': data.rating.rate >= 1,
               'text-gray-300': data.rating.rate < 1
             }"
+            (click)="rateProduct(1)"
           ></i>
           <i
             class="fas fa-star"
@@ -62,6 +63,7 @@
               'text-yellow-500': data.rating.rate >= 2,
               'text-gray-300': data.rating.rate < 2
             }"
+            (click)="rateProduct(2)"
           ></i>
           <i
             class="fas fa-star"
@@ -69,6 +71,7 @@
               'text-yellow-500': data.rating.rate >= 3,
               'text-gray-300': data.rating.rate < 3
             }"
+            (click)="rateProduct(3)"
           ></i>
           <i
             class="fas fa-star"
@@ -76,6 +79,7 @@
               'text-yellow-500': data.rating.rate >= 4,
               'text-gray-300': data.rating.rate < 4
             }"
+            (click)="rateProduct(4)"
           ></i>
           <i
             class="fas fa-star"
@@ -83,6 +87,7 @@
               'text-yellow-500': data.rating.rate >= 5,
               'text-gray-300': data.rating.rate < 5
             }"
+            (click)="rateProduct(5)"
           ></i>
         </div>
         <span class="text-gray-600">{{ data.rating.count }} reviews</span>
@@ -94,7 +99,7 @@
       class="md:w-1/3 bg-white rounded-lg shadow-lg p-4 flex flex-col space-y-4 max-w-xs ml-5"
     >
       <div class="text-xl font-bold text-gray-800">
-        ${{ data.price.toFixed(2) }}
+        EGP {{ data.price.toFixed(2) }}
       </div>
       <div class="text-gray-500 text-sm flex items-center space-x-2">
         <i class="fas fa-truck"></i>
@@ -117,7 +122,8 @@
           class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 px-3 py-2 rounded-lg flex items-center justify-center"
           (click)="addToCart()"
         >
-          <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+          <i class="fas fa-shopping-cart mr-2"></i
+          >{{ isProdInCart(data.id) ? "remove from cart" : "Add to Cart" }}
         </button>
         <button
           class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-lg"
@@ -129,9 +135,10 @@
       <div class="text-gray-500 text-sm">Sold by Amazon.eg</div>
       <div class="text-gray-500 text-sm">Secure transaction</div>
       <button
+        (click)="addToWishLish(data)"
         class="bg-gray-200 hover:bg-gray-300 text-gray-600 px-3 py-2 rounded-lg w-full"
       >
-        Add to List
+        {{ isProdInWish(data.id) ? "In your Favorites :)" : "Add to WishList" }}
       </button>
     </div>
   </div>

@@ -8,4 +8,5 @@ import { RouterModule } from '@angular/router';
   templateUrl: './nav-main.component.html',
   styleUrl: './nav-main.component.css',
 })
-export class NavMainComponent {}
+export class NavMainComponent {
+}

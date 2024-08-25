@@ -19,6 +19,8 @@ export class LoginComponent {
     addUser () { 
        this.authServ.logIn(this.formData).subscribe(response => {
         localStorage.setItem("access-token" , response.token)
+        console.log("user",response);
+        
         this.authMessage = "login successful !"
         this.authServ.user.next(true)
         setTimeout(() => { 

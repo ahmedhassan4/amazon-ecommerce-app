@@ -1,23 +1,79 @@
 <!-- Top Banner Section -->
 <div
-  class="w-full h-64 bg-cover bg-center mb-8"
+  class="w-full h-64 bg-cover bg-center"
   style="
     background-image: url('https://img.freepik.com/free-photo/black-friday-elements-assortment_23-2149074076.jpg?w=1380&t=st=1724493144~exp=1724493744~hmac=217bc97af45d0e8807d51604da2f790c02148cb6691b79ad5c12e05787e72cfb');
   "
 ></div>
 
 <div class="flex">
-  <!-- Left Banner -->
-  <div
-    class="w-1/6 max-h-full bg-cover bg-center object-cover"
-    style="
-      background-image: url('https://www.solidbackgrounds.com/images/2048x2048/2048x2048-light-blue-solid-color-background.jpg');
-    "
-  ></div>
+  <!-- Left side bar -->
+  <div class="w-1/6 p-4 bg-white shadow-md mt-10">
+    <h3 class="text-lg font-bold mb-4">Avg. Customer Review</h3>
+    <hr />
+    <div class="space-y-2 mt-5 mb-5">
+      <div class="flex items-center">
+        <span class="text-yellow-500 flex">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star text-gray-300"></i>
+        </span>
+        <span class="ml-2 text-gray-700">& Up</span>
+      </div>
+      <div class="flex items-center">
+        <span class="text-yellow-500 flex">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star text-gray-300"></i>
+          <i class="fas fa-star text-gray-300"></i>
+        </span>
+        <span class="ml-2 text-gray-700">& Up</span>
+      </div>
+      <div class="flex items-center">
+        <span class="text-yellow-500 flex">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star text-gray-300"></i>
+          <i class="fas fa-star text-gray-300"></i>
+          <i class="fas fa-star text-gray-300"></i>
+        </span>
+        <span class="ml-2 text-gray-700">& Up</span>
+      </div>
+      <div class="flex items-center">
+        <span class="text-yellow-500 flex">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star text-gray-300"></i>
+          <i class="fas fa-star text-gray-300"></i>
+          <i class="fas fa-star text-gray-300"></i>
+          <i class="fas fa-star text-gray-300"></i>
+        </span>
+        <span class="ml-2 text-gray-700">& Up</span>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-bold mb-4 mt-10">Price</h3>
+    <hr />
+    <ul class="space-y-2 text-gray-700 mt-5 mb-8">
+      <li><a href="#">Up to 50 EGP</a></li>
+      <li><a href="#">50 to 100 EGP</a></li>
+      <li><a href="#">100 to 300 EGP</a></li>
+      <li><a href="#">700 to 1500 EGP</a></li>
+    </ul>
+
+    <h3 class="text-lg font-bold mb-4 mt-10">Deals & Discounts</h3>
+    <hr />
+    <ul class="space-y-2 text-gray-700 mt-5">
+      <li><a href="#">All Discounts</a></li>
+      <li><a href="#">Today's Deals</a></li>
+    </ul>
+  </div>
 
   <!-- Main Content Area -->
-  <div class="w-5/6 p-4">
-    <h2 class="text-2xl font-bold text-gray-800 mb-4">Products</h2>
+  <div class="w-5/6 p-4 mt-10">
+    <h1 class="text-4xl font-bold text-gray-800 mb-4">Products</h1>
     <hr />
     <hr />
     <!-- Product Grid Section -->
@@ -25,18 +81,34 @@
       class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 bg-[#FAFAFA] mt-3"
     >
       @for(product of filteredProducts ; track product.id){
-      <a
-        [routerLink]="['/details', product.id]"
-        class="flex justify-center"
-        [ngClass]="{ block: true }"
-      >
-        <div class="bg-[#F2F2F2] shadow-sm overflow-hidden w-full max-w-xs">
+      <a class="flex justify-center" [ngClass]="{ block: true }">
+        <div
+          class="bg-[#F2F2F2] shadow-sm overflow-hidden w-full max-w-xs relative"
+        >
           <div class="relative">
             <img
+              [routerLink]="['/details', product.id]"
+              role="button"
               [src]="product.image"
               [alt]="product.title"
               class="w-full h-48 object-cover"
             />
+            <!-- Wishlist Button Basit ya 7bib a5ook -->
+            <button
+              (click)="addToWishlist(product)"
+              class="absolute top-2 right-2 p-2 rounded-full shadow-md focus:outline-none"
+              [ngClass]="{
+                'bg-yellow-500 text-white hover:bg-yellow-600': !isProdInWish(
+                  product.id
+                ),
+                'bg-red-500 text-white hover:bg-red-600': isProdInWish(
+                  product.id
+                )
+              }"
+              aria-label="Add to Wishlist"
+            >
+              <i class="fas fa-heart"></i>
+            </button>
           </div>
           <div class="p-4">
             <div class="flex justify-between items-center mb-2">
@@ -58,7 +130,8 @@
             </h3>
             <div class="flex items-center mb-2">
               <div class="flex items-center text-yellow-500">
-                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                @for(star of [1, 2, 3, 4, 5]; track $index){
+                <ng-container>
                   <i
                     class="fas fa-star"
                     [ngClass]="{
@@ -67,6 +140,7 @@
                     }"
                   ></i>
                 </ng-container>
+                }
               </div>
               <span class="text-gray-600 text-sm ml-2">{{
                 product.rating.count

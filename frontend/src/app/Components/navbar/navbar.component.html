@@ -33,6 +33,33 @@
             <i class="fas fa-search fa-lg"></i>
           </button>
         </div>
+
+        <!--wishlist icon 3a4an el7abyb-->
+        <div
+          class="relative flex items-center ml-2"
+          role="button"
+          routerLink="/wishlist"
+          routerLinkActive="active"
+        >
+          <div class="relative inline-block">
+            <div
+              class="inline-block p-3 bg-gradient-to-r to-yellow-500 text-white rounded-full"
+            >
+              <i class="fas fa-store text-2xl"></i>
+            </div>
+            <div
+              class="absolute top-0 right-0 transform translate-x-1 -translate-y-1"
+            >
+              <div
+                class="p-1 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full shadow-md"
+              >
+                <i class="fas fa-heart text-sm"
+                  >@if(wishlistLength){ {{ wishlistLength }}}</i
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -41,7 +41,9 @@
           (click)="addToCart(product)"
           class="bg-yellow-500 transition-all bottom-0 hover:bg-yellow-600 text-gray-700 px-3 py-2 rounded-lg flex items-center justify-center"
         >
-          <i class="fas fa-shopping-cart mr-2 text-black"></i>Add to Cart
+          <i class="fas fa-shopping-cart mr-2 text-black"></i>
+          {{ isProductInCart(product.id) ? 'Remove from Cart' : 'Add to Cart' }}
+
         </button>
       </div>
     </div>

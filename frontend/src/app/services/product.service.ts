@@ -7,7 +7,8 @@ import { IProduct } from '../models/Iproduct';
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = 'https://fakestoreapi.com/products';
+  // private baseUrl = 'https://fakestoreapi.com/products';
+  private baseUrl = 'http://localhost:3000/products'; //json server
 
   constructor(private http: HttpClient) {}
 
@@ -16,10 +17,11 @@ export class ProductService {
   }
 
   getProductsByCategory(category: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/category/${category}`);
+    return this.http.get<any[]>(`${this.baseUrl}/?category=${category}`);
   }
 
   getCombinedClothingProducts(): Observable<any[]> {
+    
     const menClothing$ = this.getProductsByCategory("men's clothing");
     const womenClothing$ = this.getProductsByCategory("women's clothing");
 
@@ -29,5 +31,11 @@ export class ProductService {
   }
   getProductById(id: number): Observable<IProduct> {
     return this.http.get<IProduct>(`${this.baseUrl}/${id}`);
+  }
+
+  rateProduct(productId: number, rating: number): Observable<IProduct> {
+    return this.http.post<IProduct>(`${this.baseUrl}/${productId}/rate`, {
+      rating,
+    });
   }
 }

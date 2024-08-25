@@ -4,6 +4,7 @@ import { SearchService } from '../../services/search.service';
 import { CategoryService } from '../../services/category.service';
 import { CartsService } from '../../services/carts.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { WishlistService } from '../../services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,13 +19,19 @@ export class NavbarComponent implements OnInit {
     private searchService: SearchService,
     private cartService: CartsService,
     private authService : AuthService,
-    private router : Router
+    private router : Router,
+    private wishlistService : WishlistService
   ) {}
-  
+  //yassin edit ;)
+  wishlistLength:number = 0;
   isLogged!:boolean;
+
+
 
   cartItemCount: number = 0;
   searchText: string = '';
+
+
 
   updateSearchText(inputEl: HTMLInputElement): void {
     this.searchText = inputEl.value;
@@ -44,6 +51,8 @@ export class NavbarComponent implements OnInit {
       this.cartItemCount = count;
       this.authService.getUserState().subscribe(state => this.isLogged = state)
     });
+
+    this.wishlistService.getWishList().subscribe(wishlist => this.wishlistLength = wishlist.length)
   }
 
   logOut() { 
@@ -51,4 +60,5 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl("/")
   }
 
+  
 }

@@ -1,50 +1,75 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
+import { CartsService } from '../../services/carts.service';
+import { WishlistService } from '../../services/wishlist/wishlist.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+// Adjust path
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './wishlist.component.html',
-  styleUrl: './wishlist.component.css'
+  styleUrls: ['./wishlist.component.css']
 })
-export class WishlistComponent implements OnInit  {
-  isLoggedIn!:boolean
-  constructor(private authServ : AuthService) { }
+export class WishlistComponent implements OnInit {
+  wishlist: any[] = [];
+
+  constructor(
+    private notification: MatSnackBar,
+    private wishlistService: WishlistService,
+    private cartService: CartsService,
+    private dialog: MatDialog
+  ) {}
+
   ngOnInit(): void {
-  this.authServ.getUserState().subscribe(state => this.isLoggedIn = state)
-}
-  wishlist = [
-    {
-      id: 1,
-      name: 'Product Name 1',
-      description: 'Short product description goes here.',
-      price: 29.99,
-      image: 'https://m.media-amazon.com/images/I/51rF5TKzVTL._AC_SX522_.jpg'
-    },
-    {
-      id: 2,
-      name: 'Product Name 2',
-      description: 'Short product description goes here.',
-      price: 49.99,
-      image: 'https://m.media-amazon.com/images/I/817QL8-1+GL._AC_SX679_.jpg'
-    },  {
-      id: 3,
-      name: 'Product Name 3',
-      description: 'Short product description goes here.',
-      price: 29.99,
-      image: 'https://m.media-amazon.com/images/I/616for3q0ML._AC_SX679_.jpg'
-    }
-    // Add more items here...
-  ];
+    this.wishlistService.getWishList().subscribe(state => this.wishlist = state);
+  }
 
   removeFromWishlist(id: number) {
-    this.wishlist = this.wishlist.filter(item => item.id !== id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Do you really want to remove this item from your wishlist?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        this.wishlistService.removeFromWishList(id);
+        this.notification.open("Product removed from wishlist successfully!", "Close", {
+          duration: 1500,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+          panelClass: 'alert-red'
+        });
+      }
+    });
   }
 
   moveToCart(item: any) {
-    console.log('Move to cart:', item);
-    this.removeFromWishlist(item.id);
+    if (!this.isProdInCart(item.id)) {
+      this.cartService.addProductToCart(item);
+      this.notification.open('Product added to cart successfully!', 'Close', {
+        duration: 1000,
+        horizontalPosition: 'right',
+        verticalPosition: "bottom",
+        panelClass: 'alert-red'
+      });
+    } else {
+      this.cartService.removeProductFromCart(item.id);
+      this.notification.open("Product removed from cart successfully!", "Close", {
+        duration: 1000,
+        horizontalPosition: 'right',
+        verticalPosition: "bottom",
+        panelClass: 'alert-red'
+      });
+    }
   }
+
+  isProdInCart(id: number): boolean {
+    return this.cartService.isProductInCart(id);
+  }
+
 }

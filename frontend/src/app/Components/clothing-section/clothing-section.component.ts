@@ -16,7 +16,7 @@ export class ClothingSectionComponent {
 
   ngOnInit(): void {
     this.productService.getCombinedClothingProducts().subscribe(
-      (data: any[]) => this.products = data.slice(0, 4), // Limit to 4 products for display
+      (data: any[]) => this.products = data.slice(0, 8), 
       error => console.error('Error fetching combined clothing products:', error)
     );
   }

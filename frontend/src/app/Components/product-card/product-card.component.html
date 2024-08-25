@@ -1,4 +1,7 @@
+<h3 class=" text-blue-950 ">{{title}} <i class="ml-2 fas fa-arrow-down"></i>
+</h3>
 <div class="product-card grid grid-cols-2 gap-4 ">
+    
     @for (product of products; track $index) {
         <div  class="product-item shadow-md">
             <img [src]="product.image" [alt]="product.title" class="w-full h-auto">

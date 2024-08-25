@@ -1,36 +1,67 @@
 <div class="min-h-screen bg-gray-100 py-12">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-2xl font-bold leading-tight text-gray-900 mb-6">
-      Your Wishlist
+      Wishlist :)
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      @for(item of wishlist; track $index) {
       <div
-        *ngFor="let item of wishlist"
-        class="bg-white p-4 rounded-lg shadow-md"
+        class="bg-white p-4 rounded-lg shadow-md transition transform hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
       >
-        <img
-          class="w-full h-48 object-cover mb-4 rounded-md"
-          [src]="item.image"
-          alt="{{ item.name }}"
-        />
-        <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
-        <p class="text-gray-500 mt-2">{{ item.description }}</p>
-        <p class="text-yellow-600 font-bold mt-2">${{ item.price }}</p>
+        <div>
+          <img
+            class="w-full h-48 object-cover mb-4 rounded-md"
+            [src]="item.image"
+            alt="{{ item.title }}"
+          />
+          <h3
+            role="button"
+            [routerLink]="['/details', item.id]"
+            class="text-lg font-semibold text-gray-900 line-clamp-2 hover:text-yellow-600"
+          >
+            {{ item.title }}
+          </h3>
+          <p class="text-gray-500 mt-2 line-clamp-3">{{ item.description }}</p>
+          <p class="text-yellow-600 font-bold mt-2">${{ item.price }}</p>
+        </div>
         <div class="mt-4 flex justify-between items-center">
           <button
+            (click)="moveToCart(item)"
+            class="text-yellow-600 hover:text-yellow-700 transition-colors focus:outline-none"
+          >
+            {{ isProdInCart(item.id) ? "Remove From Cart" : "Move To Cart" }}
+          </button>
+          <button
             (click)="removeFromWishlist(item.id)"
-            class="text-red-600 hover:text-red-700"
+            class="bg-red-600 text-white font-bold py-1 px-3 rounded hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            aria-label="Remove from Wishlist"
           >
             Remove
           </button>
-          <button
-            (click)="moveToCart(item)"
-            class="text-yellow-600 hover:text-yellow-700"
-          >
-            Move to Cart
-          </button>
         </div>
       </div>
+
+      } @empty {
+      <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div
+          class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto text-center"
+        >
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">
+            Keep your favorites now!
+          </h2>
+          <p class="text-gray-600 mb-6">
+            <button
+              routerLink="/products"
+              class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Go Now!
+            </button>
+          </p>
+        </div>
+      </div>
+      }
     </div>
   </div>
 </div>

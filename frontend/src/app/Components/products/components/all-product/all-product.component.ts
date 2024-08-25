@@ -6,6 +6,8 @@ import { IProduct } from '../../../../models/Iproduct';
 import { CategoryService } from '../../../../services/category.service';
 import { SearchService } from '../../../../services/search.service';
 import { ProductService } from '../../../../services/product.service';
+import { WishlistService } from '../../../../services/wishlist/wishlist.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-all-product',
@@ -24,7 +26,9 @@ export class AllProductComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private wishlistService: WishlistService,
+    private notification : MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -88,5 +92,25 @@ export class AllProductComponent implements OnInit, OnDestroy {
 
   private unsubscribeAll(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+
+// wish list basita 5ales
+  addToWishlist(prod: any) { 
+    
+    if(!this.isProdInWish(prod.id)){ 
+      this.wishlistService.addToWishList(prod)
+      this.notification.open('Product added to wishlist successfully!', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'right',
+        verticalPosition: "top",
+        panelClass: 'alert-red'
+      });
+    }
+    
+
+  }
+
+  isProdInWish(id:any){
+    return this.wishlistService.isProdInWishlist(id)
   }
 }

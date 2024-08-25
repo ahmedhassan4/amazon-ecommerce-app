@@ -8,13 +8,30 @@
       <a routerLink="/" class="hover:text-gray-400"> Home </a>
     </li>
     <li>
-      <a routerLink="/products" class="hover:text-gray-400"> Products</a>
+      <a
+        routerLinkActive="active"
+        routerLink="/products"
+        class="hover:text-gray-400"
+      >
+        Products</a
+      >
     </li>
     <li>
       <a routerLink="/" class="hover:text-gray-400"> New Releases </a>
     </li>
     <li>
       <a routerLink="/" class="hover:text-gray-400"> Best Sellers </a>
+    </li>
+    <li>
+      <a
+        routerLinkActive="active"
+        routerLink="/wishlist"
+        class="hover:text-gray-400"
+      >
+        wishlist @if(wishlist) {
+        {{ wishlist }}
+        }
+      </a>
     </li>
   </div>
 </nav>

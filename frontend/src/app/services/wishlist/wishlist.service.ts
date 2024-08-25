@@ -5,24 +5,39 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class WishlistService {
-  wishList = new BehaviorSubject<any>([]);
-  constructor() { }
+  private wishList: BehaviorSubject<any[]>;
+  private localWishlist: any[] = [];
 
-  saveWishListToLocalStorage() {
-    localStorage.setItem('wish', JSON.stringify(this.wishList))
+  constructor() { 
+    this.localWishlist = this.getWishFromLocal();
+    this.wishList = new BehaviorSubject<any[]>(this.localWishlist);
   }
 
-  addToWishList(product: any) {
-
-    let foundedProd = this.wishList.value.find()
+  private saveWishList(): void {
+    localStorage.setItem('wishlist', JSON.stringify(this.wishList.value));
   }
 
-  // getWishLishFromLocalStorage() { 
-  //   return localStorage.getItem("wishlist") ? JSON.parse(localStorage.getItem("wishlist" || "[]")) : []
-  // }
+  addToWishList(product: any): void {
+    let foundProd = this.wishList.value.find(item => item.id === product.id);
+    if (!foundProd) {
+      this.localWishlist.push(product);
+      this.wishList.next(this.localWishlist);
+      this.saveWishList();
+    }
+  }
 
+  removeFromWishList(productId: any): void {
+    this.localWishlist = this.localWishlist.filter(item => item.id !== productId);
+    this.wishList.next(this.localWishlist);
+    this.saveWishList();
+  }
 
-  getWishList():Observable<any> {
-    return this.wishList.asObservable()
+  private getWishFromLocal(): any[] {
+    const wishlist = localStorage.getItem('wishlist');
+    return wishlist ? JSON.parse(wishlist) : [];
+  }
+
+  getWishList(): Observable<any[]> {
+    return this.wishList.asObservable();
   }
 }

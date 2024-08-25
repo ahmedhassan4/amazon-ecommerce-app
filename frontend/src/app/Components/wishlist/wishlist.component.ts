@@ -15,20 +15,20 @@ import { WishlistService } from '../../services/wishlist/wishlist.service';
 })
 export class WishlistComponent implements OnInit  {
   isLoggedIn!:boolean
-  constructor(private wishlistService : WishlistService,private authServ : AuthService,private cartServive : CartsService) { }
-  ngOnInit(): void {
-  this.authServ.getUserState().subscribe(state => this.isLoggedIn = state)
-}
   wishlist: any[] = [];
 
+  constructor(private wishlistService : WishlistService,private authServ : AuthService,private cartServive : CartsService) { }
+  ngOnInit(): void {
+  this.wishlistService.getWishList().subscribe(state => this.wishlist = state) //fill wishlist
 
+}
 
-  // removeFromWishlist(id: number) {
-  //   this.wishlist = this.wishlist.filter(item => item.id !== id);
-  // }
-
+//remove from wishlist
+  removeFromWishlist(id: number) {
+    this.wishlistService.removeFromWishList(id)
+  }
+//move to cart
   moveToCart(item: any) {
-   this.wishlistService.getWishList().subscribe(state => console.log(state))
     this.cartServive.addProductToCart(item)
   }
 }

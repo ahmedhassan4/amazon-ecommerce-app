@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth/auth.service';
+import { WishlistService } from '../../services/wishlist/wishlist.service';
 
 @Component({
   selector: 'app-product-carousel',
@@ -39,8 +40,9 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private cartService: CartsService,
     private snackBar: MatSnackBar,
-    private authService: AuthService, // Inject AuthService here
-    private router: Router // Inject Router here
+    private authService: AuthService, 
+    private wishlistService: WishlistService,
+    private router: Router 
   ) {}
   isLogged!:boolean;
 
@@ -119,7 +121,6 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
   }
 
   addToCart(product: IProduct): void {
-    // Check if the user is logged in
     if (!this.authService.isLogged) {
      
       this.router.navigate(['/login']);
@@ -148,6 +149,32 @@ export class ProductCarouselComponent implements OnInit, OnDestroy {
 
   isProductInCart(productId: number): boolean {
     return this.cartService.isProductInCart(productId);
+  }
+  
+  addToWishlist(prod: any) { 
+    if(!this.isProdInWish(prod.id)){ 
+      this.wishlistService.addToWishList(prod)
+      this.snackBar.open('Product added to wishlist successfully!', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'right',
+        verticalPosition: "top",
+        panelClass: 'alert-red'
+      });
+    }else{
+      this.wishlistService.removeFromWishList(prod.id)
+      this.snackBar.open('Product removed to wishlist successfully!', 'Close', {
+        duration: 1500,
+        horizontalPosition: 'right',
+        verticalPosition: "top",
+        panelClass: 'alert-red'
+      });
+    }
+    
+
+  }
+
+  isProdInWish(id:any){
+    return this.wishlistService.isProdInWishlist(id)
   }
 
   show() {

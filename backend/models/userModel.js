@@ -45,10 +45,6 @@ const userSchema = mongoose.Schema({
     default: true,
     select: false,
   },
-  // cart: {
-  //   type: mongoose.Schema.ObjectId,
-  //   ref: "Cart",
-  // },
   userPayments: [
     {
       type: mongoose.Schema.ObjectId,
@@ -77,15 +73,6 @@ userSchema.pre("find", function (next) {
   next();
 });
 
-// userSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: "cart",
-//     select: "-__v",
-//   });
-
-//   next();
-// });
-
 userSchema.methods.isPasswordMatched = async function (
   candidatePasswrod,
   userPassword
@@ -107,8 +94,6 @@ userSchema.methods.changedPasswordAfterTokenReleased = function (JWTTImeStamp) {
 userSchema.methods.createPasswordResetToken = function () {
   // create reset Token
   const resetToken = crypto.randomBytes(32).toString("hex");
-
-  console.log("a7aa");
 
   // hashed it to save it in db
   this.passwordResetToken = crypto

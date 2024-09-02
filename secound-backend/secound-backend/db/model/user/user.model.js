@@ -7,7 +7,7 @@ let userSchema = new mongoose.Schema(
     password: String,
     isComfirmed: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     role: {
       type: String,

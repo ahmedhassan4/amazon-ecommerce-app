@@ -30,8 +30,8 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private service: ProductService,
     private cartService: CartsService,
-    private wishlistService : WishlistService,
-    private notification : MatSnackBar
+    private wishlistService: WishlistService,
+    private notification: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +70,36 @@ export class ProductDetailsComponent implements OnInit {
     
     // console.log('Product added to cart:', this.data);
   }
+
+  rateProduct(rating: number): void {
+    // Update the product rating and count
+    const newCount = this.data.rating.count + 1;
+    const newRate =
+      (this.data.rating.rate * this.data.rating.count + rating) / newCount;
+
+    // Update the product's data with the new rating
+    this.data.rating.rate = newRate;
+    this.data.rating.count = newCount;
+  }
+
+  // rateProduct(rating: number): void {
+  //   this.data.rating.rate = rating;
+  //   this.data.rating.count += 1;
+  // }
+
+  addToWishLish(prod: any) {
+    if (!this.isProdInWish(prod.id)) {
+      this.wishlistService.addToWishList(prod);
+      this.notification.open(
+        'Product added to wishlist successfully!',
+        'Close',
+        {
+          duration: 1500,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: 'alert-red',
+        }
+      );
   // rateProduct(rating: number): void {
   //   // Update the product rating and count
   //   const newCount = this.data.rating.count + 1;
@@ -106,8 +136,7 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  isProdInWish(id: any) { 
-   return this.wishlistService.isProdInWishlist(id);
-   
+  isProdInWish(id: any) {
+    return this.wishlistService.isProdInWishlist(id);
   }
 }

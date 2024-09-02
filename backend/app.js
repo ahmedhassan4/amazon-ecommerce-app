@@ -15,18 +15,16 @@ const app = express();
 // Body parser
 app.use(express.json({ limitL: "10kb" }));
 
-// data sanitization against NoSql query injection
 app.use(ExpressMongoSanitize());
-// data sanitization against XXS
+
 app.use(xss());
 
-// set security http headers
 app.use(helmet());
 
 // prevent parametar Pollution
 // app.use(
 //   hpp({
-//     whitelist: [],
+//     whitelist: ["sort"],
 //   })
 // );
 

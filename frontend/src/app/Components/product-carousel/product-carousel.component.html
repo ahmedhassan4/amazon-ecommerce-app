@@ -6,7 +6,7 @@
   [autoplayInterval]="3000">
 
   <ng-template pTemplate="item" let-product>
-    <div class="product-item mx-2 shadow p-5 py-32 rounded">
+    <div class="product-item mx-2 shadow p-5 py-32 rounded relative">
       <div class="product-image w-[150px] max-h-[200px]">
         <img [src]="product.image" [alt]="product.title" class=" w-[150px] max-h-[200px]">
       </div>
@@ -25,15 +25,18 @@
         </div>
         <div class="flex items-center mb-2">
           <div class="flex items-center text-yellow-500">
-            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-              <i
-                class="fas fa-star"
-                [ngClass]="{
-                  'text-yellow-500': product.rating.rate >= star,
-                  'text-gray-300': product.rating.rate < star
-                }"
-              ></i>
-            </ng-container>
+            @for (star of [1, 2, 3, 4, 5] ; track $index) {
+              <ng-container >
+                <i
+                  class="fas fa-star"
+                  [ngClass]="{
+                    'text-yellow-500': product.rating.rate >= star,
+                    'text-gray-300': product.rating.rate < star
+                  }"
+                ></i>
+              </ng-container>
+            }
+            
           </div>
           <span class="text-gray-600 text-sm ml-2">{{ product.rating.count }}</span>
         </div>
@@ -46,6 +49,24 @@
 
         </button>
       </div>
+      <button
+      (click)="addToWishlist(product)"
+      class="absolute top-2 right-2 p-2 rounded-full text-red-600 shadow-md focus:outline-none"
+      [ngClass]="{
+        'bg-yellow-500  hover:bg-yellow-600': !isProdInWish( product.id ),
+        'bg-white  hover:bg-white': isProdInWish(
+          product.id
+        )
+      }"
+      aria-label="Add to Wishlist"
+    >
+    @if (isProdInWish( product.id )) {
+      <i class=" fas fa-heart "></i>
+    }@else {
+      <i class=" far fa-heart "></i>
+    }
+     
+    </button>
     </div>
   </ng-template>
 </p-carousel>

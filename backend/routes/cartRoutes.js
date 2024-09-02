@@ -12,7 +12,7 @@ import { protect } from "../controllers/authController.js";
 
 const router = express.Router();
 
-router.post("/addToCart").post(protect, addToCart);
+router.post("/addToCart", protect, addToCart);
 
 router.route("/").get(getAllCarts).post(createCart);
 router.route("/:id").get(getCart).delete(deletecart).patch(updateCart);

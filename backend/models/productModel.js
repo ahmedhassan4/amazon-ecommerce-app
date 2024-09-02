@@ -76,13 +76,11 @@ const productSchema = new mongoose.Schema(
 //   return this.price;
 // });
 
-// virual Properties
 const poundToDollar = 50;
 productSchema.virtual("priceInDolar").get(function () {
   return this.price / poundToDollar;
 });
 
-// Document middleware
 productSchema.pre("save", function (next) {
   this.slug = slugify(this.name, "-", { lower: true });
   next();

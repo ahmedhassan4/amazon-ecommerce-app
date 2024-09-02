@@ -2,7 +2,6 @@ import Cart from "../models/cartModel.js";
 import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/appError.js";
 import Product from "../models/productModel.js";
-import CartItem from "../models/cartItemModel.js";
 import User from "../models/userModel.js";
 
 export const getAllCarts = catchAsync(async (req, res, next) => {
@@ -77,47 +76,37 @@ export const updateCart = catchAsync(async (req, res, next) => {
   });
 });
 
-export const addToCart = catchAsync(async (req, res, next) => {
+export const addToCart = catchAsync(async (req, res) => {
   const { productId, quantity } = req.body;
-  const userId = req.User._id;
 
-  // Find the product with id
   const product = await Product.findById(productId);
   if (!product) {
-    return next(
-      new AppError(`There is no product found with this Id ${productId}`)
-    );
+    next(new AppError("Product not founded!", 404));
   }
+  let cart = await Cart.findOne({ userId: req.user.id });
 
-  // Find the user's cart or create a new one
-  let cart = await Cart.findOne({ user: userId });
   if (!cart) {
-    cart = await Cart.create({ user: userId });
-  }
-
-  // Check if the product is already in the cart
-  let cartItem = await CartItem.findOne({ cart: cart_id, product: productId });
-  if (cartItem) {
-    cartItem.quantity += quantity;
-    await cartItem.save();
+    cart = await Cart.create({ userId: req.user.id, items: [] });
   } else {
-    // Otherwise, create a new cart item
-    cartItem = await CartItem.create({
-      product: productId,
-      quantity,
-      cart: cart._id,
-    });
+    const cartItem = cart.items.find(
+      (item) => item.productId.toString() === productId.toString()
+    );
 
-    // Add the new item to the cart's items array
-    cart.items.push(cartItem._id);
+    if (cartItem) {
+      cartItem.quantity += quantity;
+    } else {
+      cart.items.push({ productId, quantity });
+    }
   }
 
-  cart.total += product.price * quantity;
+  cart.total = cart.items.reduce((acc, item) => {
+    return acc + item.quantity * product.price;
+  }, 0);
+
   await cart.save();
 
   res.status(200).json({
     status: "success",
-    message: "Product added to cart",
     data: {
       cart,
     },

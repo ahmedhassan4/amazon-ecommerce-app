@@ -21,3 +21,5 @@ This repository hosts an Amazon-like e-commerce web application built using the 
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Authentication:** JSON Web Tokens (JWT)
+- **Payment Processing:** Stripe
+
